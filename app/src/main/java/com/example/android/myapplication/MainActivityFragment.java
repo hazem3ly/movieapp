@@ -1,6 +1,7 @@
 package com.example.android.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -78,8 +80,8 @@ public class MainActivityFragment extends Fragment {
             return mMovies.size();
         }
 
-        public Object getItem(int position) {
-            return null;
+        public Movie getItem(int position) {
+            return mMovies.get(position);
         }
 
         public long getItemId(int position) {
@@ -96,7 +98,7 @@ public class MainActivityFragment extends Fragment {
             }
                 ImageView img = (ImageView) view.findViewById(R.id.image_list_item_imageView);
                 TextView title = (TextView) view.findViewById(R.id.text_item);
-                Movie movie = mMovies.get(position);
+                final Movie movie = mMovies.get(position);
                 Log.d("ss",movie.title);
                 Log.d("aa",movie.relaseDate);
                 Log.d("ss",movie.poster);
@@ -105,6 +107,24 @@ public class MainActivityFragment extends Fragment {
             String url = "http://image.tmdb.org/t/p/W185/" + movie.poster;
             Log.d("aaaaaaaaaa",url);
             Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/"+movie.poster).into(img);
+            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Movie item = getItem(position);
+                    String title =item.title;
+                    String relaseDate = item.relaseDate;
+                    String poster = item.poster;
+                    String overView = item.overView;
+                    //Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
+                    Intent details = new Intent(getActivity(),Details_Movie_Activity.class)
+                            .putExtra("title",title).putExtra("relaseDate",relaseDate)
+                            .putExtra("poster",poster).putExtra("overView",overView)
+                            ;
+                    startActivity(details);
+
+                }
+            });
+
 //                img.setImageResource(mThumbIds[position]);
 
             return view;
@@ -218,6 +238,7 @@ public class MainActivityFragment extends Fragment {
             if (result != null) {
                 ImageAdapter img = new ImageAdapter(getActivity(),result);
                 mGridView.setAdapter(img);
+
 
                 }
                 // New data is back from the server.  Hooray!
