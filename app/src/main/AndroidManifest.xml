@@ -29,6 +29,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.myapplication.MainActivity" />
         </activity>
+        <activity android:name=".Settings_Activity"
+            android:label="Settings"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity">
+
+
+        </activity>
     </application>
 
 </manifest>

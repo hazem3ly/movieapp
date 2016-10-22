@@ -44,6 +44,9 @@ public class Details_Movie_Activity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent setting = new Intent(this,Settings_Activity.class);
+            startActivity(setting);
+
             return true;
         }
 

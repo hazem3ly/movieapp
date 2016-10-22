@@ -2,9 +2,11 @@ package com.example.android.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -35,20 +38,10 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+    private ProgressBar spinner;
+
     private GridView mGridView;
  //   ImageAdapter imageAdapte = new ImageAdapter(getActivity());
-    public Integer[] mThumbIds = {
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-            R.drawable.tst, R.drawable.tst,
-    };
     public MainActivityFragment() {
     }
 
@@ -56,12 +49,24 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-         mGridView = (GridView) rootView.findViewById(R.id.gridview);
+        spinner = (ProgressBar)rootView.findViewById(R.id.ProgressBar);
+        mGridView = (GridView) rootView.findViewById(R.id.gridview);
     //    gridView.setAdapter(new ImageAdapter(getActivity()));
-        FetchMovieData fetchMovieData = new FetchMovieData();
-        fetchMovieData.execute("top_rated");
+
 
         return rootView;
+    }
+    public void updateMovies() {
+        FetchMovieData fetchMovieData = new FetchMovieData();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String unitType = prefs.getString(getString(R.string.pref_sorting_key),
+                getString(R.string.pref_top_rated_value));
+        fetchMovieData.execute(unitType);
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
+        updateMovies();
     }
 
     public class ImageAdapter extends BaseAdapter {
@@ -232,17 +237,22 @@ public class MainActivityFragment extends Fragment {
             // This will only happen if there was an error getting or parsing the forecast.
             return null;
         }
+        @Override
+        protected void onPreExecute() {
+
+            spinner.setVisibility(View.VISIBLE);
+
+        }
 
         @Override
         protected void onPostExecute(List<Movie> result) {
             if (result != null) {
                 ImageAdapter img = new ImageAdapter(getActivity(),result);
+                spinner.setVisibility(View.GONE);
                 mGridView.setAdapter(img);
-
-
-                }
-                // New data is back from the server.  Hooray!
             }
+                // New data is back from the server.  Hooray!
+        }
         }
    }
 
