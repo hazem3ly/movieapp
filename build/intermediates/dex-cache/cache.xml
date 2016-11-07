@@ -30,6 +30,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.getkeepsafe.relinker\relinker\1.2.2\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b64dd5f01bc37de289f90fd59299b0c76d119611">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.getkeepsafe.relinker-relinker-1.2.2_67f1aa45a93d3eabd315a1c36678b40fa269e73f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
@@ -48,12 +57,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\io.realm\realm-android-library\2.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="a8b6e31343b6de9a37f6d81d7fdda29b3b4a90de">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.realm-realm-android-library-2.1.1_4c49b11dcac53913ae358f9a46b7449e4883e0bd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="cbd248968e1d66abd15eaf3a852eeba3c25cad6e">
+        sha1="e0350199294fa6aab333a978e58953dba50dbe77">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_55b0866a22c482d51ebeb66b750416ee34e14b71\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\2.1.1\d5a450f6ad58f779e924381744ecff0ef7e8d453\realm-annotations-2.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5a450f6ad58f779e924381744ecff0ef7e8d453">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\realm-annotations-2.1.1_62981910e6575f8e1c1dea2bb485fd8ae580b6a6\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -70,7 +97,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="e1302439316aba992d7878b06d65bc6600deaa3f">
+        sha1="08368cc574fe2017ff4d84f0e1eb05fccd288e9b">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5cae897fb4e1b4e6ea9141f6764e1857d5d296f1\classes.dex" />
     </item>
     <item
@@ -81,6 +108,15 @@
         revision="24.0.2"
         sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_d9220a91645b10059f9a48c00c52b7181b4f2f66\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.4.0_3f63aa6bfc2a3eae3976381e38ff90266cde2817\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -99,6 +135,15 @@
         revision="24.0.2"
         sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_4858ae2e10140508ce85bb9c44b3dfb149e58948\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-2.4.0_0c581290fe55931600a21da5d14aa905dd152318\classes.dex" />
     </item>
     <item
         is-multidex="true"

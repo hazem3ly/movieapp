@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -33,15 +34,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
     private ProgressBar spinner;
-
     private GridView mGridView;
- //   ImageAdapter imageAdapte = new ImageAdapter(getActivity());
+    private Realm realm;
+    private RealmConfiguration config;
     public MainActivityFragment() {
     }
 
@@ -49,13 +54,17 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        spinner = (ProgressBar)rootView.findViewById(R.id.ProgressBar);
+        spinner = (ProgressBar) rootView.findViewById(R.id.ProgressBar);
         mGridView = (GridView) rootView.findViewById(R.id.gridview);
-    //    gridView.setAdapter(new ImageAdapter(getActivity()));
+        //initializing realm database
+        Realm.init(getActivity());
 
-
+        config = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(config);
+        realm = Realm.getDefaultInstance();
         return rootView;
     }
+
     public void updateMovies() {
         FetchMovieData fetchMovieData = new FetchMovieData();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -63,8 +72,9 @@ public class MainActivityFragment extends Fragment {
                 getString(R.string.pref_top_rated_value));
         fetchMovieData.execute(unitType);
     }
+
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         updateMovies();
     }
@@ -75,7 +85,7 @@ public class MainActivityFragment extends Fragment {
         private Context mContext;
 
         // Constructor
-        public ImageAdapter(Context c,List<Movie> movies) {
+        public ImageAdapter(Context c, List<Movie> movies) {
             mContext = c;
             mMovies = movies;
 
@@ -101,30 +111,38 @@ public class MainActivityFragment extends Fragment {
                         mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.image_list_items, null);
             }
-                ImageView img = (ImageView) view.findViewById(R.id.image_list_item_imageView);
-                TextView title = (TextView) view.findViewById(R.id.text_item);
-                final Movie movie = mMovies.get(position);
-                Log.d("ss",movie.title);
-                Log.d("aa",movie.relaseDate);
-                Log.d("ss",movie.poster);
-                Log.d("CHECK", movie.overView);
-            title.setText(movie.title);
-            String url = "http://image.tmdb.org/t/p/W185/" + movie.poster;
-            Log.d("aaaaaaaaaa",url);
-            Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/"+movie.poster).into(img);
+            ImageView img = (ImageView) view.findViewById(R.id.image_list_item_imageView);
+            TextView title = (TextView) view.findViewById(R.id.text_item);
+           // RealmResults<Movie> movies = realm.where(Movie.class).findAll();
+            final Movie movie = mMovies.get(position);
+            Log.d("ss", movie.getTitle());
+            Log.d("aa", movie.getReleaseDate());
+            Log.d("ss", movie.getPoster());
+            Log.d("CHECK", movie.getOverView());
+            title.setText(movie.getTitle());
+            String url = "http://image.tmdb.org/t/p/W185/" + movie.getPoster();
+            Log.d("aaaaaaaaaa", url);
+            new Picasso.Builder(mContext)
+                    .downloader(new OkHttpDownloader(mContext,Integer.MAX_VALUE));
+            Picasso picasso = Picasso.with(mContext);
+            picasso.setIndicatorsEnabled(true);
+            picasso.load("http://image.tmdb.org/t/p/w185/" + movie.getPoster())
+                    .into(img);
+            img.setContentDescription(movie.getTitle());
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Movie item = getItem(position);
-                    String title =item.title;
-                    String relaseDate = item.relaseDate;
-                    String poster = item.poster;
-                    String overView = item.overView;
+                    String title = item.getTitle();
+                    String relaseDate = item.getReleaseDate();
+                    String poster = item.getPoster();
+                    String overView = item.getOverView();
+                    String voteAverage = item.getVoteAverage();
                     //Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
-                    Intent details = new Intent(getActivity(),Details_Movie_Activity.class)
-                            .putExtra("title",title).putExtra("relaseDate",relaseDate)
-                            .putExtra("poster",poster).putExtra("overView",overView)
-                            ;
+                    Intent details = new Intent(getActivity(), Details_Movie_Activity.class)
+                            .putExtra("title", title).putExtra("relaseDate", relaseDate)
+                            .putExtra("poster", poster).putExtra("overView", overView)
+                            .putExtra("voteAverage", voteAverage);
                     startActivity(details);
 
                 }
@@ -139,22 +157,24 @@ public class MainActivityFragment extends Fragment {
 
     public class FetchMovieData extends AsyncTask<String, Void, List<Movie>> {
         private final String LOG_TAG = FetchMovieData.class.getSimpleName();
-        private List<Movie> parsingJsonData (String movieJsonString)throws Exception {
+        private List<Movie> parsingJsonData(String movieJsonString) throws Exception {
             List<Movie> movieList = new ArrayList<>();
             JSONObject response = new JSONObject(movieJsonString);
             response.getInt("page");
             JSONArray result = response.getJSONArray("results");
             for (int i = 0; i < result.length(); i++) {
-                Movie movie = new Movie();
+
                 JSONObject obj = result.getJSONObject(i);
-                movie.overView = obj.getString("overview");
-                movie.poster= obj.getString("poster_path");
-                movie.relaseDate = obj.getString("release_date");
-                movie.title = obj.getString("title");
+                Movie movie = new Movie(obj.getInt("id"),obj.getString("poster_path"), obj.getString("overview"),
+                        obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
                 movieList.add(movie);
+                Log.d("SIZE OF ARRAY MOVIES", String.valueOf(movieList.size()));
+                saveToDatabase(obj.getInt("id"),obj.getString("poster_path"), obj.getString("overview"),
+                       obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
             }
             return movieList;
         }
+
         @Override
         protected List<Movie> doInBackground(String... params) {
             // If there's no zip code, there's nothing to look up.  Verify size of params.
@@ -169,13 +189,13 @@ public class MainActivityFragment extends Fragment {
             // Will contain the raw JSON response as a string.
             String movieStringJson = null;
             String format = "json";
- //           String units = "top_rated";
+            //           String units = "top_rated";
 //            int numDays = 7;
 
             try {
-                final String FORECAST_BASE_URL =(
-                        "http://api.themoviedb.org/3/movie/" + params[0]) ;
- //               final String QUERY_PARAM = "";
+                final String FORECAST_BASE_URL = (
+                        "http://api.themoviedb.org/3/movie/" + params[0]);
+                //               final String QUERY_PARAM = "";
 //                final String FORMAT_PARAM = "mode";
 //                final String UNITS_PARAM = "";
 //                final String DAYS_PARAM = "cnt";
@@ -229,7 +249,7 @@ public class MainActivityFragment extends Fragment {
 
             }
             try {
-                    return parsingJsonData(movieStringJson);
+                return parsingJsonData(movieStringJson);
             } catch (Exception e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 e.printStackTrace();
@@ -237,23 +257,68 @@ public class MainActivityFragment extends Fragment {
             // This will only happen if there was an error getting or parsing the forecast.
             return null;
         }
+
         @Override
         protected void onPreExecute() {
-
             spinner.setVisibility(View.VISIBLE);
-
         }
 
         @Override
         protected void onPostExecute(List<Movie> result) {
             if (result != null) {
-                ImageAdapter img = new ImageAdapter(getActivity(),result);
+                ImageAdapter img = new ImageAdapter(getActivity(), result);
                 spinner.setVisibility(View.GONE);
                 mGridView.setAdapter(img);
             }
-                // New data is back from the server.  Hooray!
+            if (result == null) {
+                //ImageAdapter img = new ImageAdapter(getActivity(), result);
+                RealmResults<Movie> movieRealmResults = realm.where(Movie.class).findAll();
+                List<Movie> movieList = new ArrayList<>(movieRealmResults.size());
+                for (Movie movie:movieRealmResults){
+                    Movie movie1 = new Movie(movie.getId(),movie.getPoster(),movie.getOverView(),movie.getReleaseDate()
+                    ,movie.getTitle(),movie.getVoteAverage());
+                    movieList.add(movie1);
+                }
+               // Toast.makeText(getActivity(), movieList.size(), Toast.LENGTH_SHORT).show();
+                Log.d("SIZE", String.valueOf(movieRealmResults.size()));
+
+                ImageAdapter img = new ImageAdapter(getActivity(), movieList);
+                spinner.setVisibility(View.GONE);
+                mGridView.setAdapter(img);
+            }
+            // New data is back from the server.  Hooray!
         }
-        }
-   }
+    }
+
+    private void saveToDatabase(final int id, final String poster_path, final String overview,
+                                final String release_date, final String title,
+                                final String vote_average) {
+        final Movie movie = new Movie();
+                movie.setId(id);
+                movie.setTitle(title);movie.setVoteAverage(vote_average);
+                movie.setReleaseDate(release_date);movie.setOverView(overview);
+                movie.setPoster(poster_path);
+                Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                // This will create a new object in Realm or throw an exception if the
+                // object already exists (same primary key)
+                // realm.copyToRealm(obj);
+
+                // This will update an existing object with the same primary key
+                // or create a new object if an object with no primary key
+                realm.copyToRealmOrUpdate(movie);
+            }
+        });
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+}
 
 

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 public class Details_Movie_Activity extends ActionBarActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,7 @@ public class Details_Movie_Activity extends ActionBarActivity {
         private String mPoster;
         private String mOverView;
         private String mRealseDate;
-
+        private String mVoteAverage;
 
         public PlaceholderFragment() { setHasOptionsMenu(true);
         }
@@ -71,6 +70,7 @@ public class Details_Movie_Activity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_details__movie_, container, false);
+
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra("title")){
 
@@ -78,12 +78,20 @@ public class Details_Movie_Activity extends ActionBarActivity {
                 mOverView = intent.getStringExtra("overView");
                 mPoster = intent.getStringExtra("poster");
                 mRealseDate = intent.getStringExtra("relaseDate");
+                mVoteAverage = intent.getStringExtra("voteAverage");
+
+                        getActivity().setTitle(mTitle);
+
+
                 ImageView poster = (ImageView)rootView.findViewById(R.id.image_poster) ;
                 TextView title = (TextView) rootView.findViewById(R.id.text_title);
                 TextView overView = (TextView) rootView.findViewById(R.id.text_over_view);
                 TextView relaseDate = (TextView) rootView.findViewById(R.id.text_relase_date);
+                TextView voteRateAverage = (TextView) rootView.findViewById(R.id.text_vote_average);
                 Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+mPoster).into(poster);
-                title.setText(mTitle);overView.setText(mOverView);relaseDate.setText(mRealseDate);
+                title.setText("Title: "+mTitle);overView.setText("Story: "+mOverView);
+                relaseDate.setText("Release Date: "+mRealseDate);voteRateAverage.setText("Vote Average = "+mVoteAverage);
+
             }
             return rootView;
         }

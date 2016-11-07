@@ -4,4 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.myapplication.Details_Movie_Activity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame"
+    />
