@@ -1,6 +1,5 @@
 package com.example.android.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,14 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.picasso.OkHttpDownloader;
-import com.squareup.picasso.Picasso;
+import com.example.android.myapplication.Data.FavMovies;
+import com.example.android.myapplication.Data.Movies;
+import com.example.android.myapplication.Data.PopMovies;
+import com.example.android.myapplication.Data.TopMovies;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,8 +44,12 @@ import io.realm.RealmResults;
 public class MainActivityFragment extends Fragment {
     private ProgressBar spinner;
     private GridView mGridView;
+    private String unitType;
+    private ImageAdapter img;
+    private List<Movies> moviesList;
     private Realm realm;
     private RealmConfiguration config;
+
     public MainActivityFragment() {
     }
 
@@ -54,23 +57,35 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        moviesList = new ArrayList<>();
         spinner = (ProgressBar) rootView.findViewById(R.id.ProgressBar);
         mGridView = (GridView) rootView.findViewById(R.id.gridview);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Movies item = moviesList.get(position);
+                Log.d("SIZE OF ARRAY MOVIES", String.valueOf(moviesList.size()));
+                int movieId =item.getId();              Log.d("unitType", String.valueOf(movieId));
+                String title = item.getTitle();                     Log.d("unitType", title);
+                String relaseDate = item.getReleaseDate();          Log.d("unitType", relaseDate);
+                String poster = item.getPoster();                   Log.d("unitType", poster);
+                String overView = item.getOverView();               Log.d("unitType", overView);
+                String voteAverage = item.getVoteAverage();         Log.d("unitType", voteAverage);
+                Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                Intent details = new Intent(getActivity(), MovieDetails.class)
+                        .putExtra("title", title).putExtra("relaseDate", relaseDate)
+                        .putExtra("poster", poster).putExtra("overView", overView)
+                        .putExtra("id",String.valueOf(movieId)).putExtra("voteAverage",voteAverage);
+                startActivity(details);
+
+            }
+        });
         //initializing realm database
         Realm.init(getActivity());
-
         config = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(config);
         realm = Realm.getDefaultInstance();
         return rootView;
-    }
-
-    public void updateMovies() {
-        FetchMovieData fetchMovieData = new FetchMovieData();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String unitType = prefs.getString(getString(R.string.pref_sorting_key),
-                getString(R.string.pref_top_rated_value));
-        fetchMovieData.execute(unitType);
     }
 
     @Override
@@ -79,104 +94,40 @@ public class MainActivityFragment extends Fragment {
         updateMovies();
     }
 
-    public class ImageAdapter extends BaseAdapter {
-        // Keep all Images in array
-        List<Movie> mMovies;
-        private Context mContext;
-
-        // Constructor
-        public ImageAdapter(Context c, List<Movie> movies) {
-            mContext = c;
-            mMovies = movies;
-
-        }
-
-        public int getCount() {
-            return mMovies.size();
-        }
-
-        public Movie getItem(int position) {
-            return mMovies.get(position);
-        }
-
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        // create a new ImageView for each item referenced by the Adapter
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = convertView;
-            if (view == null) {
-                LayoutInflater inflater = (LayoutInflater)
-                        mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.image_list_items, null);
-            }
-            ImageView img = (ImageView) view.findViewById(R.id.image_list_item_imageView);
-            TextView title = (TextView) view.findViewById(R.id.text_item);
-           // RealmResults<Movie> movies = realm.where(Movie.class).findAll();
-            final Movie movie = mMovies.get(position);
-            Log.d("ss", movie.getTitle());
-            Log.d("aa", movie.getReleaseDate());
-            Log.d("ss", movie.getPoster());
-            Log.d("CHECK", movie.getOverView());
-            title.setText(movie.getTitle());
-            String url = "http://image.tmdb.org/t/p/W185/" + movie.getPoster();
-            Log.d("aaaaaaaaaa", url);
-            new Picasso.Builder(mContext)
-                    .downloader(new OkHttpDownloader(mContext,Integer.MAX_VALUE));
-            Picasso picasso = Picasso.with(mContext);
-            picasso.setIndicatorsEnabled(true);
-            picasso.load("http://image.tmdb.org/t/p/w185/" + movie.getPoster())
-                    .into(img);
-            img.setContentDescription(movie.getTitle());
-            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Movie item = getItem(position);
-                    String title = item.getTitle();
-                    String relaseDate = item.getReleaseDate();
-                    String poster = item.getPoster();
-                    String overView = item.getOverView();
-                    String voteAverage = item.getVoteAverage();
-                    //Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
-                    Intent details = new Intent(getActivity(), Details_Movie_Activity.class)
-                            .putExtra("title", title).putExtra("relaseDate", relaseDate)
-                            .putExtra("poster", poster).putExtra("overView", overView)
-                            .putExtra("voteAverage", voteAverage);
-                    startActivity(details);
-
-                }
-            });
-
-//                img.setImageResource(mThumbIds[position]);
-
-            return view;
-        }
-
+    public void updateMovies() {
+        FetchMovieData fetchMovieData = new FetchMovieData();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        unitType = prefs.getString(getString(R.string.pref_sorting_key),
+                getString(R.string.pref_top_rated_value));
+        fetchMovieData.execute(unitType);
     }
 
-    public class FetchMovieData extends AsyncTask<String, Void, List<Movie>> {
+    public class FetchMovieData extends AsyncTask<String, Void, List<Movies>> {
         private final String LOG_TAG = FetchMovieData.class.getSimpleName();
-        private List<Movie> parsingJsonData(String movieJsonString) throws Exception {
-            List<Movie> movieList = new ArrayList<>();
+
+        private List<Movies> parsingJsonData(String movieJsonString) throws Exception {
             JSONObject response = new JSONObject(movieJsonString);
             response.getInt("page");
+            Log.d("id off page movie is?", String.valueOf(response.getInt("page")));
             JSONArray result = response.getJSONArray("results");
+            // To prevent Data duplication
+            moviesList.clear();
             for (int i = 0; i < result.length(); i++) {
-
                 JSONObject obj = result.getJSONObject(i);
-                Movie movie = new Movie(obj.getInt("id"),obj.getString("poster_path"), obj.getString("overview"),
+                Movies movies = new Movies(obj.getInt("id"), obj.getString("poster_path"), obj.getString("overview"),
                         obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
-                movieList.add(movie);
-                Log.d("SIZE OF ARRAY MOVIES", String.valueOf(movieList.size()));
-                saveToDatabase(obj.getInt("id"),obj.getString("poster_path"), obj.getString("overview"),
-                       obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
+                moviesList.add(movies);
+                int mMovieId = obj.getInt("id");
+                Log.d("id off avorit movie is?", String.valueOf(mMovieId));
+                //Log.d("SIZE OF ARRAY MOVIES", String.valueOf(moviesList.size()));
+                saveToDatabase(obj.getInt("id"), obj.getString("poster_path"), obj.getString("overview"),
+                        obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
             }
-            return movieList;
+            return moviesList;
         }
 
         @Override
-        protected List<Movie> doInBackground(String... params) {
+        protected List<Movies> doInBackground(String... params) {
             // If there's no zip code, there's nothing to look up.  Verify size of params.
             if (params.length == 0) {
                 return null;
@@ -193,6 +144,7 @@ public class MainActivityFragment extends Fragment {
 //            int numDays = 7;
 
             try {
+                if (params[0].equals("favorite")){return null;}
                 final String FORECAST_BASE_URL = (
                         "http://api.themoviedb.org/3/movie/" + params[0]);
                 //               final String QUERY_PARAM = "";
@@ -229,7 +181,7 @@ public class MainActivityFragment extends Fragment {
                     return null;
                 }
                 movieStringJson = buffer.toString();
-                Log.v(LOG_TAG, "Movie String Json= " + movieStringJson);
+                Log.v(LOG_TAG, "Movies String Json= " + movieStringJson);
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
@@ -260,65 +212,134 @@ public class MainActivityFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
+            mGridView.setVisibility(View.GONE);
             spinner.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected void onPostExecute(List<Movie> result) {
+        protected void onPostExecute(List<Movies> result) {
             if (result != null) {
                 ImageAdapter img = new ImageAdapter(getActivity(), result);
                 spinner.setVisibility(View.GONE);
+                mGridView.setVisibility(View.VISIBLE);
                 mGridView.setAdapter(img);
             }
             if (result == null) {
-                //ImageAdapter img = new ImageAdapter(getActivity(), result);
-                RealmResults<Movie> movieRealmResults = realm.where(Movie.class).findAll();
-                List<Movie> movieList = new ArrayList<>(movieRealmResults.size());
-                for (Movie movie:movieRealmResults){
-                    Movie movie1 = new Movie(movie.getId(),movie.getPoster(),movie.getOverView(),movie.getReleaseDate()
-                    ,movie.getTitle(),movie.getVoteAverage());
-                    movieList.add(movie1);
-                }
-               // Toast.makeText(getActivity(), movieList.size(), Toast.LENGTH_SHORT).show();
-                Log.d("SIZE", String.valueOf(movieRealmResults.size()));
+                RealmResults<TopMovies> TopMoviesRealmResults = realm.where(TopMovies.class).findAll();
+                RealmResults<PopMovies> PopMoviesRealmResults = realm.where(PopMovies.class).findAll();
+                RealmResults<FavMovies> FavMoviesRealmResults = realm.where(FavMovies.class).findAll();
+                // List<Movies> moviesList = new ArrayList<>();
+                if (unitType.equals("top_rated")) {
+                    moviesList.clear();
+                    for (TopMovies movies : TopMoviesRealmResults) {
+                        Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
+                                , movies.getTitle(), movies.getVoteAverage());
+                        moviesList.add(movies1);
+                    }
 
-                ImageAdapter img = new ImageAdapter(getActivity(), movieList);
-                spinner.setVisibility(View.GONE);
-                mGridView.setAdapter(img);
+                    Log.d("SIZE OF ARRAY TOPMOVIES", String.valueOf(TopMoviesRealmResults.size()));
+                    Log.d("SIZE OF ARRAY MOVIES", String.valueOf(moviesList.size()));
+                    Log.d("unitType", unitType);
+                    img = new ImageAdapter(getActivity(), moviesList);
+                    spinner.setVisibility(View.GONE);
+                    mGridView.setVisibility(View.VISIBLE);
+                    mGridView.setAdapter(img);
+                }
+                if (unitType.equals("popular")) {
+                    moviesList.clear();
+                    for (PopMovies movies : PopMoviesRealmResults) {
+                        Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
+                                , movies.getTitle(), movies.getVoteAverage());
+                        moviesList.add(movies1);
+                    }
+                    Log.d("SIZE OF ARRAY POPMOVIES", String.valueOf(PopMoviesRealmResults.size()));
+                    Log.d("SIZE OF ARRAY MOVIES", String.valueOf(moviesList.size()));
+                    Log.d("unitType", unitType);
+                    img = new ImageAdapter(getActivity(), moviesList);
+                    spinner.setVisibility(View.GONE);
+                    mGridView.setVisibility(View.VISIBLE);
+                    mGridView.setAdapter(img);
+                }
+                if (unitType.equals("favorite")) {
+                    if (FavMoviesRealmResults.size()==0){
+                        Toast.makeText(getActivity(), "No Favorite Movies Saved", Toast.LENGTH_SHORT).show();
+                        spinner.setVisibility(View.GONE);
+                        return;
+                    }
+                    moviesList.clear();
+                    for (FavMovies movies : FavMoviesRealmResults) {
+                        Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
+                                , movies.getTitle(), movies.getVoteAverage());
+                        moviesList.add(movies1);
+                    }
+                    Log.d("SIZE OF ARRAY POPMOVIES", String.valueOf(FavMoviesRealmResults.size()));
+                    Log.d("SIZE OF ARRAY MOVIES", String.valueOf(moviesList.size()));
+                    Log.d("unitType", unitType);
+                    img = new ImageAdapter(getActivity(), moviesList);
+                    spinner.setVisibility(View.GONE);
+                    mGridView.setVisibility(View.VISIBLE);
+                    mGridView.setAdapter(img);
+                }
+
+
+                // New data is back from the server.  Hooray!
             }
-            // New data is back from the server.  Hooray!
+        }
+
+        private void saveToDatabase(final int id, final String poster_path, final String overview,
+                                    final String release_date, final String title,
+                                    final String vote_average) {
+            if (unitType.equals("popular")) {
+                final PopMovies movies = new PopMovies();
+                movies.setId(id);
+                movies.setTitle(title);
+                movies.setVoteAverage(vote_average);
+                movies.setReleaseDate(release_date);
+                movies.setOverView(overview);
+                movies.setPoster(poster_path);
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        // This will create a new object in Realm or throw an exception if the
+                        // object already exists (same primary key)
+                        // realm.copyToRealm(obj);
+
+                        // This will update an existing object with the same primary key
+                        // or create a new object if an object with no primary key
+                        realm.copyToRealmOrUpdate(movies);
+                    }
+                });
+            }
+            if (unitType.equals("top_rated")) {
+                final TopMovies movies = new TopMovies();
+                movies.setId(id);
+                movies.setTitle(title);
+                movies.setVoteAverage(vote_average);
+                movies.setReleaseDate(release_date);
+                movies.setOverView(overview);
+                movies.setPoster(poster_path);
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        // This will create a new object in Realm or throw an exception if the
+                        // object already exists (same primary key)
+                        // realm.copyToRealm(obj);
+
+                        // This will update an existing object with the same primary key
+                        // or create a new object if an object with no primary key
+                        realm.copyToRealmOrUpdate(movies);
+                    }
+                });
+            }
+        }}
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            realm.close();
         }
     }
-
-    private void saveToDatabase(final int id, final String poster_path, final String overview,
-                                final String release_date, final String title,
-                                final String vote_average) {
-        final Movie movie = new Movie();
-                movie.setId(id);
-                movie.setTitle(title);movie.setVoteAverage(vote_average);
-                movie.setReleaseDate(release_date);movie.setOverView(overview);
-                movie.setPoster(poster_path);
-                Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                // This will create a new object in Realm or throw an exception if the
-                // object already exists (same primary key)
-                // realm.copyToRealm(obj);
-
-                // This will update an existing object with the same primary key
-                // or create a new object if an object with no primary key
-                realm.copyToRealmOrUpdate(movie);
-            }
-        });
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        realm.close();
-    }
-}
 
 
