@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,8 +71,10 @@ public class MovieDetails extends ActionBarActivity {
         private String mVoteAverage;
         private int mMovieId;
         private boolean isFavourite;
+        String whattoparse;
+        private boolean isVideo;
         private CheckBox imgButton;
-
+        private ProgressBar spinner;
         public PlaceholderFragment() {
             setHasOptionsMenu(true);
         }
@@ -81,6 +84,9 @@ public class MovieDetails extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_moviedetails, container, false);
             imgButton = (CheckBox) rootView.findViewById(R.id.favorite_Button);
+
+                    spinner = (ProgressBar) rootView.findViewById(R.id.Detail_ProgressBar);
+
             imgButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -121,8 +127,18 @@ public class MovieDetails extends ActionBarActivity {
 
             }
             MyAsyncTask videoTask = new MyAsyncTask();
-            videoTask.setOnListener(getActivity());
-            videoTask.execute("157336/videos");
+            MyAsyncTask reviews = new MyAsyncTask();
+            videoTask.setOnListener(this);
+            Log.d("start to parsing ?", "video");
+            videoTask.execute(mMovieId+"/videos","videos");
+            Log.d("finished  to parsing ?", "video");
+            reviews.setOnListener(this);
+            // to start execute and send the second param to say i requsting videos
+            Log.d("start to parsing ?", "reviews");
+            reviews.execute(mMovieId+"/reviews","reviews");
+            Log.d("finished  to parsing ?", "reviews");
+
+
             return rootView;
         }
 
@@ -192,9 +208,51 @@ public class MovieDetails extends ActionBarActivity {
 //            return aSharedPreferences.getBoolean("State", true);
         }
 
+
         @Override
-        public void onDataReady(String jsonStr) {
+        public void onFetchProgress() {
+            spinner.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        public void onFetchFinish() {
+            spinner.setVisibility(View.GONE);
+
+        }
+
+        @Override
+        public void onMovieDataReady(String jsonStr) {
+
+        }
+
+        @Override
+        public void onVideoDataReady(String jsonStr) {
             Toast.makeText(getActivity(), jsonStr, Toast.LENGTH_LONG).show();
+            Parser parser = new Parser();
+            Log.d("video json is :--->",jsonStr );
+
+            Log.d("now iam parsing","videos" );
+            try {
+                parser.videoJsonStrParsing(jsonStr);
+            } catch (Exception e) {
+                Log.e("error parsing", e.getMessage(), e);
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onReviewDataReady(String jsonStr) {
+            Parser parser = new Parser();
+            Log.d("review json is :--->",jsonStr );
+
+            Log.d("now iam parsing", "reviews");
+            try {
+                parser.reviewsJsonStrParsing(jsonStr);
+            } catch (Exception e) {
+                Log.e("error parsing", e.getMessage(), e);
+                e.printStackTrace();
+            }
 
         }
     }

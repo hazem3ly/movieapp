@@ -5,6 +5,10 @@ package com.example.android.myapplication;
  */
 
 public interface DataReadyInterface {
-    public void onDataReady(String jsonStr);
+    public void onFetchProgress();
+    public void onFetchFinish();
+    public void onMovieDataReady(String jsonStr);
+    public void onVideoDataReady(String jsonStr);
+    public void onReviewDataReady(String jsonStr);
 
 }

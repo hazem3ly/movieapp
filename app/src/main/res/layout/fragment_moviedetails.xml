@@ -72,6 +72,15 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/text_title" />
 
+    <ProgressBar
+        android:id="@+id/Detail_ProgressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 
 </ScrollView>

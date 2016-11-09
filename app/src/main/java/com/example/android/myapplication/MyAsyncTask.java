@@ -16,16 +16,15 @@ import java.net.URL;
  */
 
 public class MyAsyncTask extends AsyncTask<String, Void, String> {
-  //  MainActivityFragment fragment;
-  //  ProgressBar spinner = (ProgressBar) fragment.getActivity().findViewById(R.id.ProgressBar);
-  //  GridView mGridView = (GridView) fragment.getActivity().findViewById(R.id.gridview);
     DataReadyInterface listener;
+    String Data;
     @Override
     protected String doInBackground(String... params) {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String JsonString = null;
         try {
+            Data = params[1]; // set the compare string to see if movie or video or reviews
             final String MovieDB_BASE_URL = ("http://api.themoviedb.org/3/movie/" + params[0]);
             final String API_Key_PARAM = "api_key";
             final String My_Key = "39dbc8225484ac7c6ceca6ff3701b74b";
@@ -76,17 +75,30 @@ public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-      //  mGridView.setVisibility(View.GONE);
-     //   spinner.setVisibility(View.VISIBLE);
+        listener.onFetchProgress();
+//        mGridView.setVisibility(View.GONE);
+//        spinner.setVisibility(View.VISIBLE);
 
     }
     @Override
     protected void onPostExecute(String result) {
-        listener.onDataReady(result);
+        listener.onFetchFinish();
+//        mGridView.setVisibility(View.VISIBLE);
+//        spinner.setVisibility(View.GONE);
+        if (Data.equals("movies")){
+            listener.onMovieDataReady(result);
+        }
+        if (Data.equals("videos")){
+            listener.onVideoDataReady(result);
+        }
+        if (Data.equals("reviews")){
+            listener.onReviewDataReady(result);
+        }
 
     }
     public void setOnListener(DataReadyInterface listener) {
         this.listener = listener;
+
     }
 
 

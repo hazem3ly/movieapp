@@ -41,7 +41,7 @@ import io.realm.RealmResults;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements DataReadyInterface {
     private ProgressBar spinner;
     private GridView mGridView;
     private String unitType;
@@ -95,11 +95,54 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void updateMovies() {
-        FetchMovieData fetchMovieData = new FetchMovieData();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         unitType = prefs.getString(getString(R.string.pref_sorting_key),
                 getString(R.string.pref_top_rated_value));
+        FetchMovieData fetchMovieData = new FetchMovieData();
+        MyAsyncTask moviesTask = new MyAsyncTask();
+        moviesTask.setOnListener(this);
+        moviesTask.execute(unitType,"movies");
+
         fetchMovieData.execute(unitType,"secon prams here");
+    }
+
+    @Override
+    public void onFetchProgress() {
+        mGridView.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void onFetchFinish() {
+        mGridView.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onMovieDataReady(String jsonStr) {
+        Parser parser = new Parser();
+        Log.d("Movies json is :--->",jsonStr );
+
+        Log.d("now iam parsing","videos" );
+        try {
+            parser.videoJsonStrParsing(jsonStr);
+        } catch (Exception e) {
+            Log.e("error parsing", e.getMessage(), e);
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onVideoDataReady(String jsonStr) {
+
+    }
+
+    @Override
+    public void onReviewDataReady(String jsonStr) {
+
     }
 
     public class FetchMovieData extends AsyncTask<String, Void, List<Movies>> {
