@@ -99,7 +99,7 @@ public class MainActivityFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         unitType = prefs.getString(getString(R.string.pref_sorting_key),
                 getString(R.string.pref_top_rated_value));
-        fetchMovieData.execute(unitType);
+        fetchMovieData.execute(unitType,"secon prams here");
     }
 
     public class FetchMovieData extends AsyncTask<String, Void, List<Movies>> {
@@ -158,6 +158,7 @@ public class MainActivityFragment extends Fragment {
                         .appendQueryParameter(APPID_PARAM, "39dbc8225484ac7c6ceca6ff3701b74b")
                         .build();
                 URL url = new URL(builtUri.toString());
+                Log.v(LOG_TAG, "second param " + params[1]);
                 Log.v(LOG_TAG, "Built URI " + builtUri.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -286,54 +287,54 @@ public class MainActivityFragment extends Fragment {
             }
         }
 
-        private void saveToDatabase(final int id, final String poster_path, final String overview,
+    }    public void saveToDatabase(final int id, final String poster_path, final String overview,
                                     final String release_date, final String title,
                                     final String vote_average) {
-            if (unitType.equals("popular")) {
-                final PopMovies movies = new PopMovies();
-                movies.setId(id);
-                movies.setTitle(title);
-                movies.setVoteAverage(vote_average);
-                movies.setReleaseDate(release_date);
-                movies.setOverView(overview);
-                movies.setPoster(poster_path);
-                Realm realm = Realm.getDefaultInstance();
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        // This will create a new object in Realm or throw an exception if the
-                        // object already exists (same primary key)
-                        // realm.copyToRealm(obj);
+        if (unitType.equals("popular")) {
+            final PopMovies movies = new PopMovies();
+            movies.setId(id);
+            movies.setTitle(title);
+            movies.setVoteAverage(vote_average);
+            movies.setReleaseDate(release_date);
+            movies.setOverView(overview);
+            movies.setPoster(poster_path);
+            Realm realm = Realm.getDefaultInstance();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // This will create a new object in Realm or throw an exception if the
+                    // object already exists (same primary key)
+                    // realm.copyToRealm(obj);
 
-                        // This will update an existing object with the same primary key
-                        // or create a new object if an object with no primary key
-                        realm.copyToRealmOrUpdate(movies);
-                    }
-                });
-            }
-            if (unitType.equals("top_rated")) {
-                final TopMovies movies = new TopMovies();
-                movies.setId(id);
-                movies.setTitle(title);
-                movies.setVoteAverage(vote_average);
-                movies.setReleaseDate(release_date);
-                movies.setOverView(overview);
-                movies.setPoster(poster_path);
-                Realm realm = Realm.getDefaultInstance();
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        // This will create a new object in Realm or throw an exception if the
-                        // object already exists (same primary key)
-                        // realm.copyToRealm(obj);
+                    // This will update an existing object with the same primary key
+                    // or create a new object if an object with no primary key
+                    realm.copyToRealmOrUpdate(movies);
+                }
+            });
+        }
+        if (unitType.equals("top_rated")) {
+            final TopMovies movies = new TopMovies();
+            movies.setId(id);
+            movies.setTitle(title);
+            movies.setVoteAverage(vote_average);
+            movies.setReleaseDate(release_date);
+            movies.setOverView(overview);
+            movies.setPoster(poster_path);
+            Realm realm = Realm.getDefaultInstance();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    // This will create a new object in Realm or throw an exception if the
+                    // object already exists (same primary key)
+                    // realm.copyToRealm(obj);
 
-                        // This will update an existing object with the same primary key
-                        // or create a new object if an object with no primary key
-                        realm.copyToRealmOrUpdate(movies);
-                    }
-                });
-            }
-        }}
+                    // This will update an existing object with the same primary key
+                    // or create a new object if an object with no primary key
+                    realm.copyToRealmOrUpdate(movies);
+                }
+            });
+        }
+    }
 
         @Override
         public void onDestroy() {
