@@ -4,27 +4,38 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.android.myapplication.Data.Movies;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created by Hazem on 11/9/2016.
  */
 
-public class MyAsyncTask extends AsyncTask<String, Void, String> {
+public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
+    Parser parser = new Parser();
     DataReadyInterface listener;
     String Data;
+    String sortingBy;
     @Override
-    protected String doInBackground(String... params) {
+    protected List doInBackground(String... params) {
+        sortingBy = params[0];
+        Data = params[1]; // set the compare string to see if movie or video or reviews
+        if (params.length == 0) {
+                return null;
+            }
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String JsonString = null;
         try {
-            Data = params[1]; // set the compare string to see if movie or video or reviews
+            // if user select favorite option from setting it will exit from doInBackground
+            if (params[0].equals("favorite")){return null;}
             final String MovieDB_BASE_URL = ("http://api.themoviedb.org/3/movie/" + params[0]);
             final String API_Key_PARAM = "api_key";
             final String My_Key = "39dbc8225484ac7c6ceca6ff3701b74b";
@@ -68,7 +79,32 @@ public class MyAsyncTask extends AsyncTask<String, Void, String> {
                     Log.e("Error", " closing stream", e);
                 }
             }}
-        return JsonString;
+
+        if (Data.equals("movies")){
+            try {
+                return parser.movieJsonStrParsing(JsonString,sortingBy);
+            } catch (Exception e) {
+                Log.e("Parsing Erorr", e.getMessage(), e);
+                e.printStackTrace();
+            }
+        }
+        if (Data.equals("videos")){
+            try {
+                return parser.videoJsonStrParsing(JsonString,sortingBy);
+            } catch (Exception e) {
+                Log.e("Parsing Erorr", e.getMessage(), e);
+                e.printStackTrace();
+            }
+        }
+        if (Data.equals("reviews")){
+            try {
+                return parser.reviewsJsonStrParsing(JsonString,sortingBy);
+            } catch (Exception e) {
+                Log.e("Parsing Erorr", e.getMessage(), e);
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -76,15 +112,10 @@ public class MyAsyncTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         listener.onFetchProgress();
-//        mGridView.setVisibility(View.GONE);
-//        spinner.setVisibility(View.VISIBLE);
-
     }
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(List<Movies> result) {
         listener.onFetchFinish();
-//        mGridView.setVisibility(View.VISIBLE);
-//        spinner.setVisibility(View.GONE);
         if (Data.equals("movies")){
             listener.onMovieDataReady(result);
         }

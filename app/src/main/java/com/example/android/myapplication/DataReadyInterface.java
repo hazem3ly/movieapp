@@ -1,5 +1,9 @@
 package com.example.android.myapplication;
 
+import com.example.android.myapplication.Data.Movies;
+
+import java.util.List;
+
 /**
  * Created by Hazem on 11/7/2016.
  */
@@ -7,8 +11,8 @@ package com.example.android.myapplication;
 public interface DataReadyInterface {
     public void onFetchProgress();
     public void onFetchFinish();
-    public void onMovieDataReady(String jsonStr);
-    public void onVideoDataReady(String jsonStr);
-    public void onReviewDataReady(String jsonStr);
+    public void onMovieDataReady(List<Movies> jsonStr);
+    public void onVideoDataReady(List<Movies> jsonStrz);
+    public void onReviewDataReady(List<Movies> jsonStr);
 
 }

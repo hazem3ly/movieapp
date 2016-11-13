@@ -8,7 +8,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="14dp"
     android:paddingTop="10dp"
-    tools:context="com.example.android.myapplication.MainActivityFragment"
+    tools:context="com.example.android.myapplication.MainFragment"
     tools:showIn="@layout/activity_main">
     <ProgressBar
         android:id="@+id/ProgressBar"

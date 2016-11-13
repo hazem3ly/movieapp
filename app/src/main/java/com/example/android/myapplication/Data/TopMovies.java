@@ -1,5 +1,6 @@
 package com.example.android.myapplication.Data;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -14,23 +15,40 @@ public class TopMovies extends RealmObject {
     private String overView;
     private String releaseDate;
     private String title;
+    private String url1;
+    private String url2;
+    private RealmList<UserReviews> reviews;
 
+    public RealmList<UserReviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(RealmList<UserReviews> reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getUrl1() {
+        return url1;
+    }
+
+    public void setUrl1(String url1) {
+        this.url1 = url1;
+    }
+
+    public String getUrl2() {
+        return url2;
+    }
+
+    public void setUrl2(String url2) {
+        this.url2 = url2;
+    }
 
     private String voteAverage;
     public TopMovies(){
     }
-    public TopMovies(int id, String poster, String overView,
-                  String releaseDate, String title, String voteAverage) {
-        this.poster = poster;
-        this.overView = overView;
-        this.releaseDate = releaseDate;
-        this.title = title;
-        this.voteAverage = voteAverage;
-    }
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -38,32 +56,36 @@ public class TopMovies extends RealmObject {
     public void setTitle(String title) {
         this.title = title;
     }
+    public String getTitle() {
+        return title;
+    }
+
     public void setPoster(String poster) {
         this.poster = poster;
-    }
-    public void setOverView(String overView) {
-        this.overView = overView;
-    }
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
     }
     public String getPoster() {
         return poster;
     }
+
+    public void setOverView(String overView) {
+        this.overView = overView;
+    }
     public String getOverView() {
         return overView;
     }
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-    public String getTitle() {
-        return title;
+
+    public void setVoteAverage(String voteAverage) {
+        this.voteAverage = voteAverage;
     }
     public String getVoteAverage() {
         return voteAverage;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+    public String getReleaseDate() {
+        return releaseDate;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.android.myapplication.Data;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -14,19 +15,40 @@ public class PopMovies extends RealmObject {
     private String overView;
     private String releaseDate;
     private String title;
-
-
     private String voteAverage;
-    public PopMovies(){
+    private String URL1;
+    private String URL2;
+    private RealmList<UserReviews> reviews;
+
+    public RealmList<UserReviews> getReviews() {
+        return reviews;
     }
-    public PopMovies(int id, String poster, String overView,
-                     String releaseDate, String title, String voteAverage) {
-        this.poster = poster;
-        this.overView = overView;
-        this.releaseDate = releaseDate;
-        this.title = title;
-        this.voteAverage = voteAverage;
+
+    public void setReviews(RealmList<UserReviews> reviews) {
+        this.reviews = reviews;
     }
+
+    public String getURL1() {
+        return URL1;
+    }
+
+    public void setURL1(String URL1) {
+        this.URL1 = URL1;
+    }
+
+    public String getURL2() {
+        return URL2;
+    }
+
+    public void setURL2(String URL2) {
+        this.URL2 = URL2;
+    }
+
+    private boolean isFavorite;
+
+    public PopMovies() {
+    }
+
     public int getId() {
         return id;
     }
@@ -35,35 +57,52 @@ public class PopMovies extends RealmObject {
         this.id = id;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-    public void setOverView(String overView) {
-        this.overView = overView;
-    }
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-    public String getPoster() {
-        return poster;
-    }
-    public String getOverView() {
-        return overView;
-    }
-    public String getReleaseDate() {
-        return releaseDate;
-    }
+
     public String getTitle() {
         return title;
     }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setOverView(String overView) {
+        this.overView = overView;
+    }
+
+    public String getOverView() {
+        return overView;
+    }
+
+    public void setVoteAverage(String voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
     public String getVoteAverage() {
         return voteAverage;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 }
 

@@ -53,7 +53,7 @@ public class ImageAdapter extends BaseAdapter {
                 .downloader(new OkHttpDownloader(mContext, Integer.MAX_VALUE));
         Picasso picasso = Picasso.with(mContext);
         picasso.setIndicatorsEnabled(true);
-        picasso.load("http://image.tmdb.org/t/p/w185/" + movies.getPoster())
+        picasso.load("http://image.tmdb.org/t/p/w185/" + movies.getPoster()).placeholder(R.drawable.loading)
                 .into(img);
         img.setContentDescription(movies.getTitle());
         return view;
