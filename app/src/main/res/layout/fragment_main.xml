@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="10dp"
@@ -9,7 +8,7 @@
     android:paddingRight="14dp"
     android:paddingTop="10dp"
     tools:context="com.example.android.myapplication.MainFragment"
-    tools:showIn="@layout/activity_main">
+    >
     <ProgressBar
         android:id="@+id/ProgressBar"
         style="?android:attr/progressBarStyleLarge"

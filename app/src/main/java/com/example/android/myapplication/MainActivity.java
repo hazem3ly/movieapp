@@ -3,19 +3,22 @@ package com.example.android.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity  {
-
+public class MainActivity extends AppCompatActivity implements MovieSelectInterface  {
+    boolean dualPane = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
+        MainFragment mMainFragment = new MainFragment();
+        mMainFragment.setMovieSelectInterface(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.flMain,mMainFragment,"").commit();
+        if (null != findViewById(R.id.flDetails)){
+            dualPane = true;
+        }
+      }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,4 +44,18 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void setSelectedMovie(Bundle movie) {
+        if (!dualPane){
+            Intent details = new Intent(this, DetailsActivity.class)
+                        .putExtra("title", movie.getString("title")).putExtra("relaseDate", movie.getString("relaseDate"))
+                        .putExtra("poster", movie.getString("poster")).putExtra("overView", movie.getString("overView"))
+                        .putExtra("id", String.valueOf(movie.getInt("id"))).putExtra("voteAverage", movie.getString("voteAverage"));
+                startActivity(details);
+        } else {
+            DetailsFragment mDetailsFragment = new DetailsFragment();
+            mDetailsFragment.setArguments(movie);
+            getSupportFragmentManager().beginTransaction().replace(R.id.flDetails,mDetailsFragment,"").commit();
+        }
+    }
 }

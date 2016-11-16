@@ -17,10 +17,19 @@ public class TopMovies extends RealmObject {
     private String title;
     private String url1;
     private String url2;
+    private int index;
     private RealmList<UserReviews> reviews;
 
     public RealmList<UserReviews> getReviews() {
         return reviews;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public void setReviews(RealmList<UserReviews> reviews) {

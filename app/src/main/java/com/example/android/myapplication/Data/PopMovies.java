@@ -12,6 +12,7 @@ public class PopMovies extends RealmObject {
     @PrimaryKey
     private int id;
     private String poster;
+    private int index;
     private String overView;
     private String releaseDate;
     private String title;
@@ -22,6 +23,14 @@ public class PopMovies extends RealmObject {
 
     public RealmList<UserReviews> getReviews() {
         return reviews;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public void setReviews(RealmList<UserReviews> reviews) {

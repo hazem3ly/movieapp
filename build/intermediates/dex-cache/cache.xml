@@ -3,12 +3,66 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_0e0ac19eab325ca52d076a674313ac417f3cd60a\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.2.1_33eb828589973e622f373cb91f19f2b41d4ce1df.jar" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="d5c731fc64c03dfe04d51134955b483551c35849">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_fda5c3b0334925f043b730a9a7b55b997d90ac7c\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.2.1_fda5c3b0334925f043b730a9a7b55b997d90ac7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.2.1_ceaebdee0ac1f0a23c88c3a021311ffd239ec23d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.getkeepsafe.relinker\relinker\1.2.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b64dd5f01bc37de289f90fd59299b0c76d119611">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.getkeepsafe.relinker-relinker-1.2.2_67f1aa45a93d3eabd315a1c36678b40fa269e73f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_52165c36e8f1f8f5ed8d37c912779d4b19664dd2.jar" />
     </item>
     <item
         is-multidex="true"
@@ -18,123 +72,6 @@
         revision="24.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_ceaebdee0ac1f0a23c88c3a021311ffd239ec23d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\io.realm\realm-android-library\2.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="a8b6e31343b6de9a37f6d81d7fdda29b3b4a90de">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.realm-realm-android-library-2.1.1_4c49b11dcac53913ae358f9a46b7449e4883e0bd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\2.1.1\d5a450f6ad58f779e924381744ecff0ef7e8d453\realm-annotations-2.1.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5a450f6ad58f779e924381744ecff0ef7e8d453">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\realm-annotations-2.1.1_62981910e6575f8e1c1dea2bb485fd8ae580b6a6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="c42b22b720556f8fe971188d22f94e8e8e8bc8a9">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5cae897fb4e1b4e6ea9141f6764e1857d5d296f1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_d9220a91645b10059f9a48c00c52b7181b4f2f66\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_4858ae2e10140508ce85bb9c44b3dfb149e58948\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c32142195551ec2a24381e13fcac2ca3de365663\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_a7d1e9ed205eb4babf3a0333047d0aff4b2059e6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_d79d307230d5262e7ad7eeca5d205f6b8d50b4da\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_33eb828589973e622f373cb91f19f2b41d4ce1df\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_49a98ad70d6e4d4b11f337035c2caabab22dc81d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_deb659be24beda02794bcb2fd24aed90c055d435\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_fadde3f261e0361c41d0ee4936d0b749b491d4c1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_0e0ac19eab325ca52d076a674313ac417f3cd60a\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -165,12 +102,84 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\io.realm\realm-android-library\2.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="a8b6e31343b6de9a37f6d81d7fdda29b3b4a90de">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.realm-realm-android-library-2.1.1_4c49b11dcac53913ae358f9a46b7449e4883e0bd\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_d73c0fe7470d8c1f1e04da518c1496e6a18d9db2.jar" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="428c63b455233355f90543f98858c5df07334395">
+        sha1="db4b6912019a8a4ba19e8751d898254d4a826a3b">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_55b0866a22c482d51ebeb66b750416ee34e14b71\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\picasso-2.5.2_0e0ac19eab325ca52d076a674313ac417f3cd60a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\io.realm\realm-android-library\2.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="a8b6e31343b6de9a37f6d81d7fdda29b3b4a90de">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\io.realm-realm-android-library-2.1.1_4c49b11dcac53913ae358f9a46b7449e4883e0bd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\2.1.1\d5a450f6ad58f779e924381744ecff0ef7e8d453\realm-annotations-2.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5a450f6ad58f779e924381744ecff0ef7e8d453">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\realm-annotations-2.1.1_62981910e6575f8e1c1dea2bb485fd8ae580b6a6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-24.2.1_d9220a91645b10059f9a48c00c52b7181b4f2f66.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\support-annotations-24.2.1_e25d5cc4abfafd3f97fb8ac607ef40550800236e.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\2.1.1\d5a450f6ad58f779e924381744ecff0ef7e8d453\realm-annotations-2.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5a450f6ad58f779e924381744ecff0ef7e8d453">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\realm-annotations-2.1.1_62981910e6575f8e1c1dea2bb485fd8ae580b6a6\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -180,6 +189,42 @@
         revision="24.0.2"
         sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_e25d5cc4abfafd3f97fb8ac607ef40550800236e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9770243a2d7ef8fccac6d0a643228328569371d4">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5cae897fb4e1b4e6ea9141f6764e1857d5d296f1\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-24.2.1_4858ae2e10140508ce85bb9c44b3dfb149e58948.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.4.0\5b72bf48563ea8410e650de14aa33ff69a3e8c35\okio-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\okio-1.4.0_3f63aa6bfc2a3eae3976381e38ff90266cde2817.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_d9220a91645b10059f9a48c00c52b7181b4f2f66\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -201,12 +246,120 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_4858ae2e10140508ce85bb9c44b3dfb149e58948\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\okhttp-2.4.0_0c581290fe55931600a21da5d14aa905dd152318.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-24.2.1_cdf055ae9038c7dc8341a7dfe94e73c2dca42da6.jar" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\hazem\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="40340c0748190fe897baf7bffbc1b282734294e5">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-2.4.0_0c581290fe55931600a21da5d14aa905dd152318\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c32142195551ec2a24381e13fcac2ca3de365663\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_a7d1e9ed205eb4babf3a0333047d0aff4b2059e6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_d79d307230d5262e7ad7eeca5d205f6b8d50b4da\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_a7d1e9ed205eb4babf3a0333047d0aff4b2059e6.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_33eb828589973e622f373cb91f19f2b41d4ce1df\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_d79d307230d5262e7ad7eeca5d205f6b8d50b4da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_c32142195551ec2a24381e13fcac2ca3de365663.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-24.2.1_deb659be24beda02794bcb2fd24aed90c055d435.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_49a98ad70d6e4d4b11f337035c2caabab22dc81d\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -218,6 +371,42 @@
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_d164e03e763633542b408be506b3454a0c8a670d\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-24.2.1_fadde3f261e0361c41d0ee4936d0b749b491d4c1.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_deb659be24beda02794bcb2fd24aed90c055d435\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-design-24.2.1_49a98ad70d6e4d4b11f337035c2caabab22dc81d.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_fadde3f261e0361c41d0ee4936d0b749b491d4c1\classes.dex" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
         jumboMode="true"
@@ -225,6 +414,24 @@
         revision="24.0.2"
         sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
         <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_56171bb7438d2447705b2b9f33daa136c619ac43\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.1_d164e03e763633542b408be506b3454a0c8a670d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\hazem\AndroidStudioProjects\movieapp\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.2.1_56171bb7438d2447705b2b9f33daa136c619ac43.jar" />
     </item>
 
 </items>

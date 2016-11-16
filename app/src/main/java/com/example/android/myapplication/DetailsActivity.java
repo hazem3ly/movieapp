@@ -7,15 +7,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class DetailsActivity extends ActionBarActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moviedetail);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailsFragment())
-                    .commit();
-        }
+
+        Intent sentIntent = getIntent();
+        Bundle sentBundle = sentIntent.getExtras();
+        //Inflate Details Fragment & Send the Bundle to it
+        DetailsFragment mDetailsFragment = new DetailsFragment();
+        mDetailsFragment.setArguments(sentBundle);
+        getSupportFragmentManager().beginTransaction().add(R.id.flDetails, mDetailsFragment, "").commit();
+
     }
 
 

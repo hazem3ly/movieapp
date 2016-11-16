@@ -106,9 +106,6 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
         }
         return null;
     }
-
-
-
     @Override
     protected void onPreExecute() {
         listener.onFetchProgress();

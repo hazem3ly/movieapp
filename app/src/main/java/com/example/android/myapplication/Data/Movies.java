@@ -12,6 +12,7 @@ public class Movies  {
     private String overView;
     private String releaseDate;
     private String title;
+    private int index;
     private String voteAverage;
     private List<String> URL;
     private String reviews;
@@ -22,6 +23,14 @@ public class Movies  {
     public Movies(int id,String reviews){
         this.id = id;
         this.reviews = reviews;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public List<String> getURL() {

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by Hazem on 11/9/2016.
@@ -68,23 +69,40 @@ public class Parser {
         saveToDatabase(reviewsList,sortingBy);
         return reviewsList;
     }
-
     public void saveToDatabase(List<Movies> moviesL,String unitType) {
         Realm realm = Realm.getDefaultInstance();
         if (unitType.equals("popular")) {
-            for (Movies m:moviesL){
+                for (int i=0;i<moviesL.size();i++){
+                  Movies m = moviesL.get(i);
                 final PopMovies movies = new PopMovies();
+                //we data get update it set old url which saved before null
+                //so i check when updating movies for url and revies if they are exist on old data
+                // and set them to new data with same id
+                // first check if the movie with that id is exist on db if exist it will save old data from to be null(url & reviews)
                 PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
-                if (pop!=null){
-                    movies.setURL1(pop.getURL1());
-                    movies.setURL2(pop.getURL2());
-                }
-                movies.setId(m.getId());
-                movies.setTitle(m.getTitle());
-                movies.setVoteAverage(m.getVoteAverage());
-                movies.setReleaseDate(m.getReleaseDate());
-                movies.setOverView(m.getOverView());
-                movies.setPoster(m.getPoster());
+                    if (pop!=null){
+                        //saving url
+                        movies.setURL1(pop.getURL1());
+                        movies.setURL2(pop.getURL2());
+                        //check if movie reviews is not empty if so i save them
+                        if (pop.getReviews().size()!= 0){
+                            RealmList<UserReviews> userReviewses = new RealmList<>();
+                            for (int x=0 ;x<pop.getReviews().size();x++){
+                                UserReviews s = pop.getReviews().get(x);
+                                userReviewses.add(s);
+
+                            }
+                            movies.setReviews(userReviewses);
+                        }
+                    }
+                        movies.setIndex(i);
+                        movies.setId(m.getId());
+                        movies.setTitle(m.getTitle());
+                        movies.setVoteAverage(m.getVoteAverage());
+                        movies.setReleaseDate(m.getReleaseDate());
+                        movies.setOverView(m.getOverView());
+                        movies.setPoster(m.getPoster());
+
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
@@ -99,13 +117,26 @@ public class Parser {
                 });
             }}
         if (unitType.equals("top_rated")) {
-            for (Movies m:moviesL){
+            for (int i=0;i<moviesL.size();i++){
+                Movies m = moviesL.get(i);
                 final TopMovies movies = new TopMovies();
                 TopMovies top = realm.where(TopMovies.class).equalTo("id", m.getId()).findFirst();
                 if (top!=null){
+                    //saving url
                     movies.setUrl1(top.getUrl1());
                     movies.setUrl2(top.getUrl2());
+                    //check if movie reviews is not empty if so i save them
+                    if (top.getReviews().size()!= 0){
+                        RealmList<UserReviews> userReviewses = new RealmList<>();
+                        for (int x=0 ;x<top.getReviews().size();x++){
+                            UserReviews s = top.getReviews().get(x);
+                            userReviewses.add(s);
+                        }
+                        movies.setReviews(userReviewses);
+                    }
+
                 }
+                movies.setIndex(i);
                 movies.setId(m.getId());
                 movies.setTitle(m.getTitle());
                 movies.setVoteAverage(m.getVoteAverage());
@@ -151,6 +182,7 @@ public class Parser {
                          Log.d("Video url", String.valueOf(pop.getURL2()));
                          realm.commitTransaction();
                      }
+                     return;
                  }
                  TopMovies top = realm.where(TopMovies.class).equalTo("id", m.getId()).findFirst();
                  if (top != null) {
@@ -171,33 +203,51 @@ public class Parser {
                          Log.d("Video url", String.valueOf(top.getUrl2()));
                          realm.commitTransaction();
                      }
+                     return;
                  }
              }
          }
 
         if (unitType.contains("reviews")) {
-            int id = 0;
             for (int i = 0; i < moviesL.size(); i++) {
                 Movies m = moviesL.get(i); //Find first item on list
-                id = m.getId();
-                m.getId();
-                m.getReviews();
-                realm.beginTransaction();
-                PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
-                UserReviews userReviews = realm.createObject(UserReviews.class);
-                userReviews.setReviews(m.getReviews());
-                pop.getReviews().add(userReviews);
-                realm.commitTransaction();
-//            final UserReviews movies = new UserReviews();
-//            realm.beginTransaction();
-//            movies.setId(m.getId());
+                m.getId();                 //get movie id to set reviews
+                m.getReviews();            //reviews we got from jsonString
+                //check if the movie id on popular movies db
+                final PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
+                if (pop != null){
+                    // start storing to db
+                    realm.beginTransaction();
+                    if (i == 0){pop.setReviews(null);}//delete old data to prevent duplicate
+                    //then we create object from UserReview to set the reviews
+                    UserReviews userReviews = realm.createObject(UserReviews.class);
+                    // set review on UserReviews db
+                    userReviews.setReviews(m.getReviews());
+                    //add this review to the movie review list
+                    pop.getReviews().add(userReviews);
+                    // commit db storing
+                    realm.commitTransaction();
+                }
+
+                //check if the movie id on top rated movies db
+                TopMovies top = realm.where(TopMovies.class).equalTo("id", m.getId()).findFirst();
+                if (top != null){
+                    // start storing to db
+                    realm.beginTransaction();
+                    if (i == 0){top.setReviews(null);}//delete old data to prevent duplicate
+                    //then we create object from UserReview to set the reviews
+                    UserReviews userReviews = realm.createObject(UserReviews.class);
+                   // userReviews.setIndex(i);
+                    // set review on UserReviews db
+                    userReviews.setReviews(m.getReviews());
+                    //add this review to the movie review list
+                    top.getReviews().add(userReviews);
+                    // commit db storing
+                    realm.commitTransaction();
+                }
 
             }
-            PopMovies pop = realm.where(PopMovies.class).equalTo("id",id).findFirst();
-            int x = pop.getReviews().size();
-                for (int i=0;i < pop.getReviews().size();i++){
-                    Log.d("items",String.valueOf(pop.getReviews().get(i)));
-                }
+
         }
     }
 }
