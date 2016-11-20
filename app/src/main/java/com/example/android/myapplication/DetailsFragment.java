@@ -264,6 +264,7 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
                     TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText("   No Videos Available For This Movie");
+                    txt.setId(0);
                     buttonContainer.addView(txt);
                 }
                 for (int i = 0; i < top.getTrailers().size(); i++) {
@@ -288,6 +289,7 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
                     TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText("  No Videos Available For This Movie");
+                    txt.setId(0);
                     buttonContainer.addView(txt);
                 }
                 for (int i = 0; i < result.size(); i++) {
@@ -317,16 +319,18 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
             if (pop != null) {
                 Log.d("Size of reviews on pop", String.valueOf(pop.getReviews().size()));
                 if (pop.getReviews().size() == 0){
-                    TextView txt = new TextView(getActivity());
+                    final TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText("No Reviews Available For This Movie");
+                    txt.setId(0);
                     reviewContainer.addView(txt);
                 }
                 for (int i=0;i < pop.getReviews().size();i++){
                     UserReviews s = pop.getReviews().get(i);
-                    TextView txt = new TextView(getActivity());
+                    final TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText(s.getReviews());
+                    txt.setId(i);
                     reviewContainer.addView(txt);
                     Log.d("review",String.valueOf(s.getReviews()));
                 }
@@ -336,16 +340,18 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
             if (top != null) {
                 Log.d("Size of reviews on top", String.valueOf(top.getReviews().size()));
                 if (top.getReviews().size() == 0){
-                    TextView txt = new TextView(getActivity());
+                    final TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText("No Reviews Available For This Movie");
+                    txt.setId(0);
                     reviewContainer.addView(txt);
                 }
                 for (int i=0;i < top.getReviews().size();i++){
                     UserReviews s = top.getReviews().get(i);
-                    TextView txt = new TextView(getActivity());
+                    final TextView txt = new TextView(getActivity());
                     txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     txt.setText(s.getReviews());
+                    txt.setId(i);
                     reviewContainer.addView(txt);
                     Log.d("review",String.valueOf(s.getReviews()));
                 }
@@ -356,16 +362,18 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
         if (result != null) {
             Log.d("Size of reviews", String.valueOf(result.size()));
             if (result.size() == 0){
-                TextView txt = new TextView(getActivity());
+                final TextView txt = new TextView(getActivity());
                 txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 txt.setText("No Reviews Available For This Movie");
+                txt.setId(0);
                 reviewContainer.addView(txt);
             }
             for (int i = 0; i < result.size(); i++) {
                 Movies m = result.get(i); //Find first item on list
-                TextView txt = new TextView(getActivity());
+                final TextView txt = new TextView(getActivity());
                 txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 txt.setText(m.getReviews());
+                txt.setId(i);
                 reviewContainer.addView(txt);
                 //reviews we got from jsonString
                 Log.d("review",String.valueOf(m.getReviews()));
