@@ -7,16 +7,7 @@ import io.realm.RealmObject;
  */
 // as realm db does not support String list so i create this class
 public class UserReviews extends RealmObject {
-    private int index;
     private String reviews;
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public String getReviews() {
         return reviews;

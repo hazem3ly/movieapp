@@ -14,12 +14,13 @@ public class DetailsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_moviedetail);
 
         Intent sentIntent = getIntent();
-        Bundle sentBundle = sentIntent.getExtras();
+        Bundle movie = sentIntent.getBundleExtra("movie");
         //Inflate Details Fragment & Send the Bundle to it
-        DetailsFragment mDetailsFragment = new DetailsFragment();
-        mDetailsFragment.setArguments(sentBundle);
-        getSupportFragmentManager().beginTransaction().add(R.id.flDetails, mDetailsFragment, "").commit();
-
+        if (savedInstanceState == null) {
+            DetailsFragment mDetailsFragment = new DetailsFragment();
+            mDetailsFragment.setArguments(movie);
+            getSupportFragmentManager().beginTransaction().replace(R.id.flDetails, mDetailsFragment, "").commit();
+        }
     }
 
 

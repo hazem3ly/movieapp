@@ -48,7 +48,7 @@ public class MainFragment extends Fragment implements DataReadyInterface {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         newmoviesList = new ArrayList<>();
         spinner = (ProgressBar) rootView.findViewById(R.id.ProgressBar);
-        mGridView = (GridView) rootView.findViewById(R.id.gridview);
+        mGridView = (GridView) rootView.findViewById(R.id.gridView);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,19 +56,10 @@ public class MainFragment extends Fragment implements DataReadyInterface {
 
                 Movies item = newmoviesList.get(position);
                 Bundle movie = new Bundle();
-                movie.putInt("id", item.getId());
-                movie.putString("title", item.getTitle());
-                movie.putString("relaseDate", item.getReleaseDate());
-                movie.putString("poster", item.getPoster());
-                movie.putString("overView", item.getOverView());
-                movie.putString("voteAverage", item.getVoteAverage());
+                movie.putInt("id", item.getId());movie.putString("title", item.getTitle());movie.putString("back_drop",item.getBackdrop());
+                movie.putString("relaseDate", item.getReleaseDate());movie.putString("poster", item.getPoster());
+                movie.putString("overView", item.getOverView());movie.putString("voteAverage", item.getVoteAverage());
                 movieSelectInterface.setSelectedMovie(movie);
-
-//                Intent details = new Intent(getActivity(), DetailsActivity.class)
-//                        .putExtra("title", item.getTitle()).putExtra("relaseDate", item.getReleaseDate())
-//                        .putExtra("poster", item.getPoster()).putExtra("overView", item.getOverView())
-//                        .putExtra("id", String.valueOf(item.getId())).putExtra("voteAverage", item.getVoteAverage());
-//                startActivity(details);
             }
         });
         //initializing realm database
@@ -135,12 +126,13 @@ public class MainFragment extends Fragment implements DataReadyInterface {
 
         }
         if (result == null) {
+            Toast.makeText(getActivity(), "You Are Offline", Toast.LENGTH_SHORT).show();
             newmoviesList = new ArrayList<>();
             if (sortingBy.equals("top_rated")) {
                 RealmResults<TopMovies> TopMoviesRealmResults = realm.where(TopMovies.class).findAllSorted("index", Sort.ASCENDING);
                     for (TopMovies movies : TopMoviesRealmResults) {
                         Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
-                                , movies.getTitle(), movies.getVoteAverage());
+                                , movies.getTitle(), movies.getVoteAverage(),movies.getBackdrop_path());
                         newmoviesList.add(movies1);
                     }
             }
@@ -148,7 +140,7 @@ public class MainFragment extends Fragment implements DataReadyInterface {
                 RealmResults<PopMovies> PopMoviesRealmResults = realm.where(PopMovies.class).findAllSorted("index", Sort.ASCENDING);
                 for (PopMovies movies : PopMoviesRealmResults) {
                     Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
-                            , movies.getTitle(), movies.getVoteAverage());
+                            , movies.getTitle(), movies.getVoteAverage(),movies.getBackdrop_path());
                     newmoviesList.add(movies1);
                 }
             }
@@ -163,7 +155,7 @@ public class MainFragment extends Fragment implements DataReadyInterface {
                 }
                 for (FavMovies movies : FavMoviesRealmResults) {
                     Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
-                            , movies.getTitle(), movies.getVoteAverage());
+                            , movies.getTitle(), movies.getVoteAverage(),movies.getBack_Drop());
                     newmoviesList.add(movies1);
                 }
             }
@@ -178,6 +170,7 @@ public class MainFragment extends Fragment implements DataReadyInterface {
 
         }
     }
+
 
     @Override
     public void onVideoDataReady(List<Movies> result) {

@@ -1,10 +1,9 @@
 package com.example.android.myapplication;
 
-import android.util.Log;
-
 import com.example.android.myapplication.Data.Movies;
 import com.example.android.myapplication.Data.PopMovies;
 import com.example.android.myapplication.Data.TopMovies;
+import com.example.android.myapplication.Data.TrailersData;
 import com.example.android.myapplication.Data.UserReviews;
 
 import org.json.JSONArray;
@@ -34,7 +33,7 @@ public class Parser {
         for (int i = 0; i < result.length(); i++) {
             JSONObject obj = result.getJSONObject(i);
             Movies movies = new Movies(obj.getInt("id"), obj.getString("poster_path"), obj.getString("overview"),
-                    obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"));
+                    obj.getString("release_date"), obj.getString("title"), obj.getString("vote_average"),obj.getString("backdrop_path"));
             moviesList.add(movies);
         }
         saveToDatabase(moviesList,SortingBy);
@@ -49,10 +48,9 @@ public class Parser {
         for (int i= 0; i< results.length(); i++){
            JSONObject obj = results.getJSONObject(i);
             String fullVideoUrl =baseVideoUrl + obj.getString("key");
-            url.add(fullVideoUrl);
+            Movies moviesTrailer = new Movies(response.getInt("id"),fullVideoUrl,obj.getString("name"));
+            videoUrl.add(moviesTrailer);
         }
-        Movies moviesTrailer = new Movies(response.getInt("id"),url);
-        videoUrl.add(moviesTrailer);
         saveToDatabase(videoUrl,sortingBy);
         return videoUrl;
     }
@@ -62,7 +60,7 @@ public class Parser {
         JSONArray results = response.getJSONArray("results");
         for (int i=0; i < results.length(); i++){
             JSONObject obj = results.getJSONObject(i);
-            String review = obj.getString("author" ) + ": " + obj.getString("content");
+            String review = obj.getString("author" ) + ":-\n\t\t\t\t\t " + obj.getString("content");
             Movies movieReview = new Movies(response.getInt("id"),review);
             reviewsList.add(movieReview);
         }
@@ -82,8 +80,14 @@ public class Parser {
                 PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
                     if (pop!=null){
                         //saving url
-                        movies.setURL1(pop.getURL1());
-                        movies.setURL2(pop.getURL2());
+                        if (pop.getTrailers().size()!= 0){
+                            RealmList<TrailersData> trailersData = new RealmList<>();
+                            for (int c=0 ;c<pop.getTrailers().size();c++){
+                                TrailersData t = pop.getTrailers().get(c);
+                                trailersData.add(t);
+                            }
+                            movies.setTrailers(trailersData);
+                        }
                         //check if movie reviews is not empty if so i save them
                         if (pop.getReviews().size()!= 0){
                             RealmList<UserReviews> userReviewses = new RealmList<>();
@@ -96,6 +100,7 @@ public class Parser {
                         }
                     }
                         movies.setIndex(i);
+                        movies.setBackdrop_path(m.getBackdrop());
                         movies.setId(m.getId());
                         movies.setTitle(m.getTitle());
                         movies.setVoteAverage(m.getVoteAverage());
@@ -112,7 +117,7 @@ public class Parser {
 
                         // This will update an existing object with the same primary key
                         // or create a new object if an object with no primary key
-                        realm.copyToRealmOrUpdate(movies);
+                 realm.copyToRealmOrUpdate(movies);
                     }
                 });
             }}
@@ -123,8 +128,14 @@ public class Parser {
                 TopMovies top = realm.where(TopMovies.class).equalTo("id", m.getId()).findFirst();
                 if (top!=null){
                     //saving url
-                    movies.setUrl1(top.getUrl1());
-                    movies.setUrl2(top.getUrl2());
+                    if (top.getTrailers().size()!= 0){
+                        RealmList<TrailersData> trailersData = new RealmList<>();
+                        for (int c=0 ;c<top.getTrailers().size();c++){
+                            TrailersData t = top.getTrailers().get(c);
+                            trailersData.add(t);
+                        }
+                        movies.setTrailers(trailersData);
+                    }
                     //check if movie reviews is not empty if so i save them
                     if (top.getReviews().size()!= 0){
                         RealmList<UserReviews> userReviewses = new RealmList<>();
@@ -137,6 +148,7 @@ public class Parser {
 
                 }
                 movies.setIndex(i);
+                movies.setBackdrop_path(m.getBackdrop());
                 movies.setId(m.getId());
                 movies.setTitle(m.getTitle());
                 movies.setVoteAverage(m.getVoteAverage());
@@ -161,49 +173,31 @@ public class Parser {
              for (int i = 0; i < moviesL.size(); i++) {
                  Movies m = moviesL.get(i); //Find first item on list
 //                 int mMovieId = m.getId();  // get id of selected movie
-                 final List<String> url = m.getURL(); // get url list of selected movie
                  // first search for movie id on db and if not found it will return null
                  PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
                  if (pop != null) {
                      // this mean we found movie id on this db
-                     if (url.size() == 1) {
-                         // if there is only one item on list we set only one url
-                         realm.beginTransaction();
-                         pop.setURL1(url.get(0));
-                         Log.d("Video url", url.get(0));
-                         realm.commitTransaction();
-                     }
-                     if (url.size() >= 2) {
-                         // if there are more than or equal to 2 url we will save only two links
-                         realm.beginTransaction();
-                         pop.setURL1(url.get(0));
-                         pop.setURL2(url.get(1));
-                         Log.d("Video url", String.valueOf(pop.getURL1()));
-                         Log.d("Video url", String.valueOf(pop.getURL2()));
-                         realm.commitTransaction();
-                     }
-                     return;
+                     realm.beginTransaction();
+                     if (i == 0){pop.setTrailers(null);}//delete old data to prevent duplicate
+                     TrailersData trailersData = realm.createObject(TrailersData.class);
+                            trailersData.setUrl(m.getURL());
+                            trailersData.setName(m.getUrl_name());
+                     pop.getTrailers().add(trailersData);
+                     realm.commitTransaction();
                  }
                  TopMovies top = realm.where(TopMovies.class).equalTo("id", m.getId()).findFirst();
                  if (top != null) {
                      // this mean we found movie id on this db
-                     if (url.size() == 1) {
-                         // if there is only one item on list we set only one url
-                         realm.beginTransaction();
-                         top.setUrl1(url.get(0));
-                         Log.d("Video url", url.get(0));
-                         realm.commitTransaction();
-                     }
-                     if (url.size() >= 2) {
-                         // if there are more than or equal to 2 url we will save only two links
-                         realm.beginTransaction();
-                         top.setUrl1(url.get(0));
-                         top.setUrl2(url.get(1));
-                         Log.d("Video url", String.valueOf(top.getUrl1()));
-                         Log.d("Video url", String.valueOf(top.getUrl2()));
-                         realm.commitTransaction();
-                     }
-                     return;
+                     realm.beginTransaction();
+                     if (i == 0){top.setTrailers(null);}//delete old data to prevent duplicate
+                     //then we create object from TrailersData to set the trailer
+                     TrailersData trailersData = realm.createObject(TrailersData.class);
+                            trailersData.setUrl(m.getURL());
+                            trailersData.setName(m.getUrl_name());
+                     //add this trailer to the movie trailer list
+                     top.getTrailers().add(trailersData);
+                     // commit db storing
+                     realm.commitTransaction();
                  }
              }
          }

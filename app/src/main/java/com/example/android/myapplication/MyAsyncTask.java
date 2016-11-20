@@ -45,6 +45,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
             URL url = new URL(builtUri.toString());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+            urlConnection.setUseCaches(true);
             urlConnection.connect();
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();

@@ -48,9 +48,7 @@ public class MainActivity extends AppCompatActivity implements MovieSelectInterf
     public void setSelectedMovie(Bundle movie) {
         if (!dualPane){
             Intent details = new Intent(this, DetailsActivity.class)
-                        .putExtra("title", movie.getString("title")).putExtra("relaseDate", movie.getString("relaseDate"))
-                        .putExtra("poster", movie.getString("poster")).putExtra("overView", movie.getString("overView"))
-                        .putExtra("id", String.valueOf(movie.getInt("id"))).putExtra("voteAverage", movie.getString("voteAverage"));
+                    .putExtra("movie",movie);
                 startActivity(details);
         } else {
             DetailsFragment mDetailsFragment = new DetailsFragment();

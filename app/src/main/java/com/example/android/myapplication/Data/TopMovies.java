@@ -17,15 +17,32 @@ public class TopMovies extends RealmObject {
     private String title;
     private String url1;
     private String url2;
+    private String backdrop_path;
     private int index;
     private RealmList<UserReviews> reviews;
-
+    private RealmList<TrailersData> trailers;
     public RealmList<UserReviews> getReviews() {
         return reviews;
     }
 
     public int getIndex() {
         return index;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public RealmList<TrailersData> getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(RealmList<TrailersData> trailers) {
+        this.trailers = trailers;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public void setIndex(int index) {

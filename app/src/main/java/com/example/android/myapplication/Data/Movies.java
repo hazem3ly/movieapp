@@ -1,7 +1,5 @@
 package com.example.android.myapplication.Data;
 
-import java.util.List;
-
 /**
  * Created by Hazem on 10/21/2016.
  */
@@ -14,43 +12,61 @@ public class Movies  {
     private String title;
     private int index;
     private String voteAverage;
-    private List<String> URL;
+    private String URL;
+    private String url_name;
     private String reviews;
-    public Movies(int id,List<String> movieURL){
+    private String backdrop;
+    public Movies(int id,String movieURL,String url_name){
         this.id = id;
         this.URL = movieURL;
+        this.url_name = url_name;
     }
     public Movies(int id,String reviews){
         this.id = id;
         this.reviews = reviews;
     }
 
+    public Movies(int id, String poster, String overView,
+                  String releaseDate, String title, String voteAverage,String backdrop) {
+        this.id=id;
+        this.poster = poster;
+        this.overView = overView;
+        this.releaseDate = releaseDate;
+        this.backdrop = backdrop;
+        this.title = title;
+        this.voteAverage = voteAverage;
+       }
     public int getIndex() {
         return index;
+    }
+
+    public String getUrl_name() {
+        return url_name;
+    }
+
+    public void setUrl_name(String url_name) {
+        this.url_name = url_name;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
     public void setIndex(int index) {
         this.index = index;
     }
 
-    public List<String> getURL() {
+    public String getURL() {
         return URL;
     }
 
-    public void setURL(List<String> URL) {
+    public void setURL(String URL) {
         this.URL = URL;
     }
-
-    public Movies(int id, String poster, String overView,
-                  String releaseDate, String title, String voteAverage) {
-        this.id=id;
-        this.poster = poster;
-        this.overView = overView;
-        this.releaseDate = releaseDate;
-
-        this.title = title;
-        this.voteAverage = voteAverage;
-       }
 
     public String getReviews() {
         return reviews;

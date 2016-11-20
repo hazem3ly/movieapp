@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.android.myapplication.Data.FavMovies;
 import com.example.android.myapplication.Data.Movies;
 import com.example.android.myapplication.Data.PopMovies;
 import com.example.android.myapplication.Data.TopMovies;
+import com.example.android.myapplication.Data.TrailersData;
 import com.example.android.myapplication.Data.UserReviews;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +36,7 @@ import io.realm.RealmResults;
 public  class DetailsFragment extends Fragment implements DataReadyInterface {
     private String mTitle;
     private String mPoster;
+    private String mBackDrop;
     private String mOverView;
     private String mRealseDate;
     private String mVoteAverage;
@@ -41,6 +44,7 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
     private boolean isFavourite;
     private CheckBox imgButton;
     private ImageView poster;
+    private ImageView imageTitle;
     TextView overView;
     TextView relaseDate;
     TextView voteRateAverage;
@@ -52,7 +56,7 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
     private String url1 = "";
     private String url2 = "";
     private String review = "";
-
+    View rootView;
     public DetailsFragment() {
         setHasOptionsMenu(true);
     }
@@ -60,39 +64,40 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_moviedetails, container, false);
+         rootView = inflater.inflate(R.layout.fragment_moviedetails, container, false);
         poster = (ImageView) rootView.findViewById(R.id.image_poster);
+        imageTitle = (ImageView) rootView.findViewById(R.id.image_title);
         title = (TextView) rootView.findViewById(R.id.text_title);
         overView = (TextView) rootView.findViewById(R.id.text_over_view);
         relaseDate = (TextView) rootView.findViewById(R.id.text_relase_date);
         voteRateAverage = (TextView) rootView.findViewById(R.id.text_vote_average);
         imgButton = (CheckBox) rootView.findViewById(R.id.favorite_Button);
-        youtube1 = (Button) rootView.findViewById(R.id.youtube1);
-        youtube2 = (Button) rootView.findViewById(R.id.youtube2);
-        reviews = (TextView) rootView.findViewById(R.id.review);
-        spinner = (ProgressBar) rootView.findViewById(R.id.Detail_ProgressBar);
-        youtube1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (url1.contains("https://www.youtube.com/watch?v=")) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
-                } else {
-                    Toast.makeText(getActivity(), "No Videos Available", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-        youtube2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (url2.contains("https://www.youtube.com/watch?v=")) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
-                } else {
-                    Toast.makeText(getActivity(), "No Videos Available", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
+//        youtube1 = (Button) rootView.findViewById(R.id.youtube1);
+//        youtube2 = (Button) rootView.findViewById(R.id.youtube2);
+ //       reviews = (TextView) rootView.findViewById(R.id.review);
+       // spinner = (ProgressBar) rootView.findViewById(R.id.Detail_ProgressBar);
+//        youtube1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (url1.contains("https://www.youtube.com/watch?v=")) {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
+//                } else {
+//                    Toast.makeText(getActivity(), "No Videos Available", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
+//        youtube2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (url2.contains("https://www.youtube.com/watch?v=")) {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url1)));
+//                } else {
+//                    Toast.makeText(getActivity(), "No Videos Available", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
         imgButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -109,39 +114,23 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
                 }
             }
         });
-        Bundle movie = getArguments();
-        mTitle = movie.getString("title");
-        mOverView = movie.getString("overView");
-        mPoster = movie.getString("poster");
-        mRealseDate = movie.getString("relaseDate");
-        mVoteAverage = movie.getString("voteAverage");
-        mMovieId = movie.getInt("id");
-        getActivity().setTitle(mTitle);
-        imgButton.setChecked(isFavourite = readState());
-        Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w500/" + mPoster).into(poster);
-        title.setText("Title: " + mTitle);
-        overView.setText("Story: " + mOverView);
-        relaseDate.setText("Release Date: " + mRealseDate);
-        voteRateAverage.setText("Vote Average = " + mVoteAverage);
-
-        Intent intent = getActivity().getIntent();
-        if (intent != null && intent.hasExtra("title")) {
-            mTitle = intent.getStringExtra("title");
-            mOverView = intent.getStringExtra("overView");
-            mPoster = intent.getStringExtra("poster");
-            mRealseDate = intent.getStringExtra("relaseDate");
-            mVoteAverage = intent.getStringExtra("voteAverage");
-            mMovieId = Integer.parseInt(intent.getStringExtra("id"));
+            Bundle movie = getArguments();
+            mTitle = movie.getString("title");
+            mOverView = movie.getString("overView");
+            mPoster = movie.getString("poster");
+            mBackDrop = movie.getString("back_drop");
+            mRealseDate = movie.getString("relaseDate");
+            mVoteAverage = movie.getString("voteAverage");
+            mMovieId = movie.getInt("id");
             getActivity().setTitle(mTitle);
             imgButton.setChecked(isFavourite = readState());
-            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w500/" + mPoster).into(poster);
-            title.setText("Title: " + mTitle);
-            overView.setText("Story: " + mOverView);
-            relaseDate.setText("Release Date: " + mRealseDate);
-            voteRateAverage.setText("Vote Average = " + mVoteAverage);
+            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w780/" + mBackDrop).placeholder(R.drawable.poster_loading).into(poster);
+            Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w300/" + mPoster).placeholder(R.drawable.title_loading).into(imageTitle);
+            title.setText(mTitle);
+            overView.setText(mOverView);
+            relaseDate.setText(mRealseDate);
+            voteRateAverage.setText(mVoteAverage + "/10");
 
-
-        }
         MyAsyncTask videoTask = new MyAsyncTask();
         MyAsyncTask reviews = new MyAsyncTask();
         videoTask.setOnListener(this);
@@ -185,6 +174,7 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
             movies.setReleaseDate(mRealseDate);
             movies.setOverView(mOverView);
             movies.setPoster(mPoster);
+            movies.setBack_Drop(mBackDrop);
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
@@ -220,13 +210,13 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
 
     @Override
     public void onFetchProgress() {
-        spinner.setVisibility(View.VISIBLE);
+        //spinner.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void onFetchFinish() {
-        spinner.setVisibility(View.GONE);
+       // spinner.setVisibility(View.GONE);
 
     }
 
@@ -237,75 +227,150 @@ public  class DetailsFragment extends Fragment implements DataReadyInterface {
 
     @Override
     public void onVideoDataReady(List<Movies> result) {
+        LinearLayout buttonContainer = (LinearLayout) rootView.findViewById(R.id.button_container);
         if (result == null) {
             Toast.makeText(getActivity(), "No Network Connection", Toast.LENGTH_SHORT).show();
             Realm realm = Realm.getDefaultInstance();
             PopMovies pop = realm.where(PopMovies.class).equalTo("id", mMovieId).findFirst();
             if (pop != null) {
-                url1 = String.valueOf(pop.getURL1());
-                url2 = String.valueOf(pop.getURL2());
+                Log.d("Size of videos on pop", String.valueOf(pop.getReviews().size()));
+                if (pop.getTrailers().size() == 0) {
+                   final TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText("   No Videos Available For This Movie");
+                    txt.setId(0);
+                    buttonContainer.addView(txt);
+                }
+                for (int i = 0; i < pop.getTrailers().size(); i++) {
+                    final TrailersData s = pop.getTrailers().get(i);
+                   final Button bttn = new Button(getActivity());
+                    bttn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    bttn.setText(s.getName());
+                    bttn.setId(i);
+                    bttn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(s.getUrl())));
+                        }
+                    });
+                    buttonContainer.addView(bttn);
+                }
                 return;
             }
             TopMovies top = realm.where(TopMovies.class).equalTo("id", mMovieId).findFirst();
             if (top != null) {
-                url1 = String.valueOf(top.getUrl1());
-                url2 = String.valueOf(top.getUrl2());
-                return;
+                Log.d("Size of videos on top", String.valueOf(top.getReviews().size()));
+                if (top.getTrailers().size() == 0) {
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText("   No Videos Available For This Movie");
+                    buttonContainer.addView(txt);
+                }
+                for (int i = 0; i < top.getTrailers().size(); i++) {
+                    final TrailersData s = top.getTrailers().get(i);
+                   final Button bttn = new Button(getActivity());
+                    bttn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    bttn.setText(s.getName());
+                    bttn.setId(i);
+                    bttn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(s.getUrl())));
+                        }
+                    });
+                    buttonContainer.addView(bttn);
+                    return;
+                }
+            }}
+            if (result != null) {
+                Log.d("Size of trailers", String.valueOf(result.size()));
+                if (result.size() == 0) {
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText("  No Videos Available For This Movie");
+                    buttonContainer.addView(txt);
+                }
+                for (int i = 0; i < result.size(); i++) {
+                    Movies m = result.get(i); //Find first item on list
+                    final String url = m.getURL();
+                    String name = m.getUrl_name();
+                    final Button bttn = new Button(getActivity());
+                    bttn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    bttn.setText(name);
+                    bttn.setId(i);
+                    bttn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        }
+                    });
+                    buttonContainer.addView(bttn);
+                }
             }
         }
-        if (result != null) {
-            for (int i = 0; i < result.size(); i++) {
-                Movies m = result.get(i);
-                List<String> url = m.getURL();
-                if (url.size() == 1) {
-                    url1 = url.get(0);
-                    url2 = "no video";
-                }
-                if (url.size() >= 2) {
-                    url1 = url.get(0);
-                    url2 = url.get(1);
-                }
-            }
-        }
-    }
-
     @Override
     public void onReviewDataReady(List<Movies> result) {
+        LinearLayout reviewContainer = (LinearLayout) rootView.findViewById(R.id.reviews_containers);
         if (result == null) {
             Realm realm = Realm.getDefaultInstance();
             PopMovies pop = realm.where(PopMovies.class).equalTo("id", mMovieId).findFirst();
             if (pop != null) {
                 Log.d("Size of reviews on pop", String.valueOf(pop.getReviews().size()));
+                if (pop.getReviews().size() == 0){
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText("No Reviews Available For This Movie");
+                    reviewContainer.addView(txt);
+                }
                 for (int i=0;i < pop.getReviews().size();i++){
                     UserReviews s = pop.getReviews().get(i);
-                    review = review + "\n" + s.getReviews();
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText(s.getReviews());
+                    reviewContainer.addView(txt);
                     Log.d("review",String.valueOf(s.getReviews()));
                 }
-                reviews.setText(review);
                 return;
             }
             TopMovies top = realm.where(TopMovies.class).equalTo("id", mMovieId).findFirst();
             if (top != null) {
                 Log.d("Size of reviews on top", String.valueOf(top.getReviews().size()));
+                if (top.getReviews().size() == 0){
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText("No Reviews Available For This Movie");
+                    reviewContainer.addView(txt);
+                }
                 for (int i=0;i < top.getReviews().size();i++){
                     UserReviews s = top.getReviews().get(i);
-                    review = review + "\n" + s.getReviews();
+                    TextView txt = new TextView(getActivity());
+                    txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    txt.setText(s.getReviews());
+                    reviewContainer.addView(txt);
                     Log.d("review",String.valueOf(s.getReviews()));
                 }
-                reviews.setText(review);
                 return;
             }
 
         }
         if (result != null) {
             Log.d("Size of reviews", String.valueOf(result.size()));
+            if (result.size() == 0){
+                TextView txt = new TextView(getActivity());
+                txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                txt.setText("No Reviews Available For This Movie");
+                reviewContainer.addView(txt);
+            }
             for (int i = 0; i < result.size(); i++) {
                 Movies m = result.get(i); //Find first item on list
-                review  = review + "\n\n\n\n" +m.getReviews();            //reviews we got from jsonString
+                TextView txt = new TextView(getActivity());
+                txt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                txt.setText(m.getReviews());
+                reviewContainer.addView(txt);
+                //reviews we got from jsonString
                 Log.d("review",String.valueOf(m.getReviews()));
 
             }
-            reviews.setText(review);
         }
     }
 }

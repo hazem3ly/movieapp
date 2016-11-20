@@ -3,23 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="14dp"
-    android:paddingTop="10dp"
+    android:paddingBottom="1dp"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp"
+    android:paddingTop="1dp"
     tools:context="com.example.android.myapplication.MainFragment"
     >
     <ProgressBar
         android:id="@+id/ProgressBar"
-        style="?android:attr/progressBarStyleLarge"
-
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal" />
 
 
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnWidth="150dp"

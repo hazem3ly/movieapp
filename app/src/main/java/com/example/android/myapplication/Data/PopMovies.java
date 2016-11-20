@@ -20,13 +20,30 @@ public class PopMovies extends RealmObject {
     private String URL1;
     private String URL2;
     private RealmList<UserReviews> reviews;
-
+    private RealmList<TrailersData> trailers;
+    private String backdrop_path;
     public RealmList<UserReviews> getReviews() {
         return reviews;
     }
 
     public int getIndex() {
         return index;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public RealmList<TrailersData> getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(RealmList<TrailersData> trailers) {
+        this.trailers = trailers;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public void setIndex(int index) {

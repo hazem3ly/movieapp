@@ -1,5 +1,6 @@
 package com.example.android.myapplication.Data;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -14,9 +15,11 @@ public class FavMovies extends RealmObject {
     private String overView;
     private String releaseDate;
     private String title;
-
-
+    private String Back_Drop;
     private String voteAverage;
+    private RealmList<UserReviews> reviews;
+    private RealmList<TrailersData> trailers;
+
     public FavMovies(){
     }
     public FavMovies(int id, String poster, String overView,
@@ -29,6 +32,30 @@ public class FavMovies extends RealmObject {
     }
     public int getId() {
         return id;
+    }
+
+    public String getBack_Drop() {
+        return Back_Drop;
+    }
+
+    public RealmList<UserReviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(RealmList<UserReviews> reviews) {
+        this.reviews = reviews;
+    }
+
+    public RealmList<TrailersData> getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(RealmList<TrailersData> trailers) {
+        this.trailers = trailers;
+    }
+
+    public void setBack_Drop(String back_Drop) {
+        Back_Drop = back_Drop;
     }
 
     public void setId(int id) {
