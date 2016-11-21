@@ -7,30 +7,40 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Hazem on 11/8/2016.
  */
-
+//Top_related DataBase File
 public class TopMovies extends RealmObject {
     @PrimaryKey
     private int id;
-    private String poster;
-    private String overView;
-    private String releaseDate;
-    private String title;
-    private String url1;
-    private String url2;
-    private String backdrop_path;
     private int index;
+    private String poster,overView,releaseDate,title,backdrop_path,voteAverage;
     private RealmList<UserReviews> reviews;
     private RealmList<TrailersData> trailers;
+
+    public TopMovies(){
+    }
+
     public RealmList<UserReviews> getReviews() {
         return reviews;
+    }
+
+    public void setReviews(RealmList<UserReviews> reviews) {
+        this.reviews = reviews;
     }
 
     public int getIndex() {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getBackdrop_path() {
         return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public RealmList<TrailersData> getTrailers() {
@@ -41,37 +51,7 @@ public class TopMovies extends RealmObject {
         this.trailers = trailers;
     }
 
-    public void setBackdrop_path(String backdrop_path) {
-        this.backdrop_path = backdrop_path;
-    }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public void setReviews(RealmList<UserReviews> reviews) {
-        this.reviews = reviews;
-    }
-
-    public String getUrl1() {
-        return url1;
-    }
-
-    public void setUrl1(String url1) {
-        this.url1 = url1;
-    }
-
-    public String getUrl2() {
-        return url2;
-    }
-
-    public void setUrl2(String url2) {
-        this.url2 = url2;
-    }
-
-    private String voteAverage;
-    public TopMovies(){
-    }
     public int getId() {
         return id;
     }
@@ -79,39 +59,44 @@ public class TopMovies extends RealmObject {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getTitle() {
-        return title;
+
+    public String getPoster() {
+        return poster;
     }
 
     public void setPoster(String poster) {
         this.poster = poster;
     }
-    public String getPoster() {
-        return poster;
+
+    public String getOverView() {
+        return overView;
     }
 
     public void setOverView(String overView) {
         this.overView = overView;
     }
-    public String getOverView() {
-        return overView;
+
+    public String getVoteAverage() {
+        return voteAverage;
     }
 
     public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
-    public String getVoteAverage() {
-        return voteAverage;
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-    public String getReleaseDate() {
-        return releaseDate;
     }
 }
 

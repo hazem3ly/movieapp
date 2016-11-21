@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="com.example.android.myapplication.MainActivity">
+
     <FrameLayout
         android:id="@+id/flMain"
         android:layout_width="0dp"
-        android:layout_weight="0.3"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"></FrameLayout>
+
     <FrameLayout
         android:id="@+id/flDetails"
         android:layout_width="0dp"
-        android:layout_weight="0.7"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"></FrameLayout>
 </LinearLayout>

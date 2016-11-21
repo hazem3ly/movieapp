@@ -7,8 +7,8 @@
     android:paddingLeft="1dp"
     android:paddingRight="1dp"
     android:paddingTop="1dp"
-    tools:context="com.example.android.myapplication.MainFragment"
-    >
+    tools:context="com.example.android.myapplication.MainFragment">
+
     <ProgressBar
         android:id="@+id/ProgressBar"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
@@ -22,12 +22,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnWidth="150dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="1dp"
-        android:horizontalSpacing="1dp"
-        android:stretchMode="columnWidth"
         android:gravity="center"
-        />
+        android:horizontalSpacing="1dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
 
 
 </FrameLayout>

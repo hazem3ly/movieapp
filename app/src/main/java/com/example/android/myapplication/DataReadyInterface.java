@@ -10,9 +10,13 @@ import java.util.List;
 
 public interface DataReadyInterface {
     public void onFetchProgress();
+
     public void onFetchFinish();
+
     public void onMovieDataReady(List<Movies> jsonStr);
+
     public void onVideoDataReady(List<Movies> jsonStrz);
+
     public void onReviewDataReady(List<Movies> jsonStr);
 
 }

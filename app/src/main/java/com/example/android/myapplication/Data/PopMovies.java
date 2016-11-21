@@ -11,27 +11,36 @@ import io.realm.annotations.PrimaryKey;
 public class PopMovies extends RealmObject {
     @PrimaryKey
     private int id;
-    private String poster;
     private int index;
-    private String overView;
-    private String releaseDate;
-    private String title;
-    private String voteAverage;
-    private String URL1;
-    private String URL2;
+    private String poster,overView,releaseDate,title,voteAverage,backdrop_path;
     private RealmList<UserReviews> reviews;
     private RealmList<TrailersData> trailers;
-    private String backdrop_path;
+
+    public PopMovies() {
+    }
+
     public RealmList<UserReviews> getReviews() {
         return reviews;
+    }
+
+    public void setReviews(RealmList<UserReviews> reviews) {
+        this.reviews = reviews;
     }
 
     public int getIndex() {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getBackdrop_path() {
         return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public RealmList<TrailersData> getTrailers() {
@@ -42,39 +51,6 @@ public class PopMovies extends RealmObject {
         this.trailers = trailers;
     }
 
-    public void setBackdrop_path(String backdrop_path) {
-        this.backdrop_path = backdrop_path;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public void setReviews(RealmList<UserReviews> reviews) {
-        this.reviews = reviews;
-    }
-
-    public String getURL1() {
-        return URL1;
-    }
-
-    public void setURL1(String URL1) {
-        this.URL1 = URL1;
-    }
-
-    public String getURL2() {
-        return URL2;
-    }
-
-    public void setURL2(String URL2) {
-        this.URL2 = URL2;
-    }
-
-    private boolean isFavorite;
-
-    public PopMovies() {
-    }
-
     public int getId() {
         return id;
     }
@@ -83,52 +59,44 @@ public class PopMovies extends RealmObject {
         this.id = id;
     }
 
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPoster() {
+        return poster;
     }
 
     public void setPoster(String poster) {
         this.poster = poster;
     }
 
-    public String getPoster() {
-        return poster;
+    public String getOverView() {
+        return overView;
     }
 
     public void setOverView(String overView) {
         this.overView = overView;
     }
 
-    public String getOverView() {
-        return overView;
+    public String getVoteAverage() {
+        return voteAverage;
     }
 
     public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
 
-    public String getVoteAverage() {
-        return voteAverage;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
     }
 }
 

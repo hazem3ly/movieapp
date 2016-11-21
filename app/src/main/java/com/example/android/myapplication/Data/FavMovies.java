@@ -22,20 +22,19 @@ public class FavMovies extends RealmObject {
 
     public FavMovies(){
     }
-    public FavMovies(int id, String poster, String overView,
-                     String releaseDate, String title, String voteAverage) {
-        this.poster = poster;
-        this.overView = overView;
-        this.releaseDate = releaseDate;
-        this.title = title;
-        this.voteAverage = voteAverage;
-    }
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getBack_Drop() {
         return Back_Drop;
+    }
+    public void setBack_Drop(String back_Drop) {
+        Back_Drop = back_Drop;
     }
 
     public RealmList<UserReviews> getReviews() {
@@ -54,43 +53,44 @@ public class FavMovies extends RealmObject {
         this.trailers = trailers;
     }
 
-    public void setBack_Drop(String back_Drop) {
-        Back_Drop = back_Drop;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getOverView() {
+        return overView;
+    }
+
+    public void setOverView(String overView) {
+        this.overView = overView;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-    public void setOverView(String overView) {
-        this.overView = overView;
-    }
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-    public String getPoster() {
-        return poster;
-    }
-    public String getOverView() {
-        return overView;
-    }
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-    public String getTitle() {
-        return title;
-    }
+
     public String getVoteAverage() {
         return voteAverage;
+    }
+
+    public void setVoteAverage(String voteAverage) {
+        this.voteAverage = voteAverage;
     }
 }
 

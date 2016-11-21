@@ -5,7 +5,7 @@ import io.realm.RealmObject;
 /**
  * Created by Hazem on 11/12/2016.
  */
-// as realm db does not support String list so i create this class
+// as realm db does not support String list so i create this class to use when creating reviews list
 public class UserReviews extends RealmObject {
     private String reviews;
 

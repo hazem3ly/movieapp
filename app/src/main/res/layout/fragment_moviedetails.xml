@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,142 +9,138 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:src="@drawable/poster_loading"
                 android:id="@+id/image_poster"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"/>
-            <ImageView
-                android:src="@drawable/title_loading"
-                android:id="@+id/image_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-                android:layout_marginTop="180dp"
-                android:layout_marginLeft="10dp"
-             />
-            <TextView
-                android:layout_below="@id/image_poster"
-                android:layout_toRightOf="@id/image_title"
-                android:id="@+id/text_title"
-                android:gravity="center"
-                android:background="#E0E0E0"
-                android:textSize="25sp"
-                android:layout_width="match_parent"
-                android:layout_height="80dp" />
-            <TextView
-                android:text="Release Date:"
-                android:textSize="15sp"
-                android:textAllCaps="true"
-                android:id="@+id/date_text"
-                android:paddingLeft="7dp"
-                android:layout_below="@id/text_title"
-                android:layout_toRightOf="@id/image_title"
-                android:background="#BDBDBD"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_below="@id/date_text"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/image_title"
-                android:id="@+id/text_relase_date"
-                android:gravity="center"
-                android:background="#E0E0E0"
-                android:textSize="25sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:src="@drawable/poster_loading" />
 
+            <!--<ImageView-->
+                <!--android:layout_below="@id/image_poster"-->
+                <!--android:id="@+id/image_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/title_loading" />-->
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/image_poster"
+                android:background="#E0E0E0"
+                android:gravity="center"
+                android:textSize="25sp" />
             <CheckBox
-                android:layout_below="@id/date_text"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right"
                 android:id="@+id/favorite_Button"
                 style="?android:attr/starStyle"
+                android:layout_below="@id/image_poster"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:width="@android:dimen/app_icon_size"
                 android:textColorLink="?android:attr/colorPressedHighlight" />
             <TextView
-                android:text="Rate:"
-                android:layout_toRightOf="@id/image_title"
-                android:textSize="15sp"
-                android:layout_below="@id/text_relase_date"
-                android:textAllCaps="true"
-                android:id="@+id/Rate_text"
-                android:paddingLeft="7dp"
-
+                android:id="@+id/date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#BDBDBD"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_below="@id/text_title"
+                android:paddingLeft="7dp"
+                android:text="Release Date:"
+                android:textAllCaps="true"
+                android:textSize="15sp" />
             <TextView
-                android:layout_toRightOf="@id/image_title"
-                android:id="@+id/text_vote_average"
-                android:background="#E0E0E0"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:textSize="25sp"
+                android:id="@+id/text_relase_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_text"
+                android:background="#E0E0E0"
+                android:gravity="center"
+                android:textSize="25sp" />
+            <TextView
+                android:id="@+id/Rate_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_relase_date"
+                android:background="#BDBDBD"
+                android:paddingLeft="7dp"
+                android:text="Rate:"
+                android:textAllCaps="true"
+                android:textSize="15sp" />
+            <!--android:layout_toRightOf="@id/image_title"-->
+            <TextView
+                android:id="@+id/text_vote_average"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Rate_text"
+                android:background="#E0E0E0"
+                android:gravity="center"
+                android:textSize="25sp" />
+            <!--android:layout_toRightOf="@id/image_title"-->
 
         </RelativeLayout>
+
         <TextView
-            android:text="Description:"
-            android:textSize="15sp"
-            android:textAllCaps="true"
-            android:paddingLeft="7dp"
-            android:background="#BDBDBD"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#BDBDBD"
+            android:paddingLeft="7dp"
+            android:text="Description:"
+            android:textAllCaps="true"
+            android:textSize="15sp" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:background="#E0E0E0"
             android:id="@+id/text_over_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:background="#E0E0E0"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
         <!--<ProgressBar-->
-            <!--android:id="@+id/Detail_ProgressBar"-->
-            <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar"-->
-            <!--android:layout_width="27dp"-->
-            <!--android:layout_height="26dp"-->
-            <!--android:layout_gravity="center_vertical|center_horizontal" />-->
+        <!--android:id="@+id/Detail_ProgressBar"-->
+        <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar"-->
+        <!--android:layout_width="27dp"-->
+        <!--android:layout_height="26dp"-->
+        <!--android:layout_gravity="center_vertical|center_horizontal" />-->
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#90CAF9"
             android:gravity="center"
             android:text="@string/videos_trailers"
             android:textAllCaps="true"
-            android:textSize="25sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-       <LinearLayout
-           android:id="@+id/button_container"
-           android:orientation="vertical"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-       </LinearLayout>
-        <TextView
-            android:text="@string/reviews"
-            android:background="#90CAF9"
-            android:textAllCaps="true"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="25sp" />
+
         <LinearLayout
-            android:padding="10dp"
-            android:orientation="vertical"
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#90CAF9"
+            android:gravity="center"
+            android:text="@string/reviews"
+            android:textAllCaps="true"
+            android:textSize="25sp" />
+
+        <LinearLayout
             android:id="@+id/reviews_containers"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
         </LinearLayout>
     </LinearLayout>

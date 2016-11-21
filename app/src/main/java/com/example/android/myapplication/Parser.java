@@ -20,11 +20,10 @@ import io.realm.RealmList;
  */
 
 public class Parser {
-    MainFragment mainFragment;
-    List<Movies> videoUrl;
-    List<Movies> reviewsList;
-    List<Movies> moviesList;
-    List<String> url;
+     List<Movies> videoUrl;
+     List<Movies> reviewsList;
+     List<Movies> moviesList;
+    //this method take movies json string and start parsing and save to database
     public List<Movies> movieJsonStrParsing(String movieJsonString,String SortingBy) throws Exception {
         JSONObject response = new JSONObject(movieJsonString);
         moviesList = new ArrayList<>();
@@ -39,9 +38,9 @@ public class Parser {
         saveToDatabase(moviesList,SortingBy);
         return moviesList;
     }
+    //this method take Trailers json string and start parsing and save to database
     public List<Movies> videoJsonStrParsing (String videoJsonStr,String sortingBy) throws Exception {
         videoUrl = new ArrayList<>();
-        url = new ArrayList<>();
         String baseVideoUrl = "https://www.youtube.com/watch?v=";
         JSONObject response = new JSONObject(videoJsonStr);
         JSONArray results = response.getJSONArray("results");
@@ -54,6 +53,7 @@ public class Parser {
         saveToDatabase(videoUrl,sortingBy);
         return videoUrl;
     }
+    //this method take Reviews json string and start parsing and save to database
     public List<Movies> reviewsJsonStrParsing (String reviewJsonStr,String sortingBy) throws Exception {
         reviewsList = new ArrayList<>();
         JSONObject response = new JSONObject(reviewJsonStr);
@@ -73,10 +73,10 @@ public class Parser {
                 for (int i=0;i<moviesL.size();i++){
                   Movies m = moviesL.get(i);
                 final PopMovies movies = new PopMovies();
-                //we data get update it set old url which saved before null
-                //so i check when updating movies for url and revies if they are exist on old data
+                //when data update it set old Trailers and Reviews which saved before to null
+                //so i check when updating movies for trailers and reviews if they are exist on old data
                 // and set them to new data with same id
-                // first check if the movie with that id is exist on db if exist it will save old data from to be null(url & reviews)
+                // first check if the movie with that id is exist on db if exist it will save old data from to be null(trailers & reviews)
                 PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
                     if (pop!=null){
                         //saving url
@@ -94,7 +94,6 @@ public class Parser {
                             for (int x=0 ;x<pop.getReviews().size();x++){
                                 UserReviews s = pop.getReviews().get(x);
                                 userReviewses.add(s);
-
                             }
                             movies.setReviews(userReviewses);
                         }
@@ -107,14 +106,9 @@ public class Parser {
                         movies.setReleaseDate(m.getReleaseDate());
                         movies.setOverView(m.getOverView());
                         movies.setPoster(m.getPoster());
-
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        // This will create a new object in Realm or throw an exception if the
-                        // object already exists (same primary key)
-                        // realm.copyToRealm(obj);
-
                         // This will update an existing object with the same primary key
                         // or create a new object if an object with no primary key
                  realm.copyToRealmOrUpdate(movies);
@@ -158,10 +152,6 @@ public class Parser {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        // This will create a new object in Realm or throw an exception if the
-                        // object already exists (same primary key)
-                        // realm.copyToRealm(obj);
-
                         // This will update an existing object with the same primary key
                         // or create a new object if an object with no primary key
                         realm.copyToRealmOrUpdate(movies);
@@ -172,7 +162,6 @@ public class Parser {
          if (unitType.contains("videos")) {
              for (int i = 0; i < moviesL.size(); i++) {
                  Movies m = moviesL.get(i); //Find first item on list
-//                 int mMovieId = m.getId();  // get id of selected movie
                  // first search for movie id on db and if not found it will return null
                  PopMovies pop = realm.where(PopMovies.class).equalTo("id", m.getId()).findFirst();
                  if (pop != null) {

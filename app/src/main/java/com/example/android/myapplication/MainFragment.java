@@ -26,6 +26,8 @@ import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class MainFragment extends Fragment implements DataReadyInterface {
+    private static int lastPosition;
+    private static String lastSortTybe = "";
     private ProgressBar spinner;
     private GridView mGridView;
     private String sortingBy;
@@ -33,12 +35,10 @@ public class MainFragment extends Fragment implements DataReadyInterface {
     private List<Movies> newmoviesList;
     private Realm realm;
     private RealmConfiguration config;
-    private static int lastPosition;
-    private static String lastSortTybe = "";
-
+    private MovieSelectInterface movieSelectInterface;
     public MainFragment() {
     }
-    private MovieSelectInterface movieSelectInterface;
+
     void setMovieSelectInterface (MovieSelectInterface movieSelectInterface){
         this.movieSelectInterface = movieSelectInterface;
     }
@@ -49,15 +49,13 @@ public class MainFragment extends Fragment implements DataReadyInterface {
         newmoviesList = new ArrayList<>();
         spinner = (ProgressBar) rootView.findViewById(R.id.ProgressBar);
         mGridView = (GridView) rootView.findViewById(R.id.gridView);
-
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Movies item = newmoviesList.get(position);
                 Bundle movie = new Bundle();
                 movie.putInt("id", item.getId());movie.putString("title", item.getTitle());movie.putString("back_drop",item.getBackdrop());
-                movie.putString("relaseDate", item.getReleaseDate());movie.putString("poster", item.getPoster());
+                movie.putString("releaseDate", item.getReleaseDate());movie.putString("poster", item.getPoster());
                 movie.putString("overView", item.getOverView());movie.putString("voteAverage", item.getVoteAverage());
                 movieSelectInterface.setSelectedMovie(movie);
             }
@@ -123,12 +121,11 @@ public class MainFragment extends Fragment implements DataReadyInterface {
             if (lastSortTybe.equals(sortingBy)){
                 mGridView.setSelection(lastPosition);
             }
-
         }
         if (result == null) {
-            Toast.makeText(getActivity(), "You Are Offline", Toast.LENGTH_SHORT).show();
             newmoviesList = new ArrayList<>();
             if (sortingBy.equals("top_rated")) {
+                Toast.makeText(getActivity(), "You Are Offline", Toast.LENGTH_SHORT).show();
                 RealmResults<TopMovies> TopMoviesRealmResults = realm.where(TopMovies.class).findAllSorted("index", Sort.ASCENDING);
                     for (TopMovies movies : TopMoviesRealmResults) {
                         Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()
@@ -137,6 +134,7 @@ public class MainFragment extends Fragment implements DataReadyInterface {
                     }
             }
             if (sortingBy.equals("popular")) {
+                Toast.makeText(getActivity(), "You Are Offline", Toast.LENGTH_SHORT).show();
                 RealmResults<PopMovies> PopMoviesRealmResults = realm.where(PopMovies.class).findAllSorted("index", Sort.ASCENDING);
                 for (PopMovies movies : PopMoviesRealmResults) {
                     Movies movies1 = new Movies(movies.getId(), movies.getPoster(), movies.getOverView(), movies.getReleaseDate()

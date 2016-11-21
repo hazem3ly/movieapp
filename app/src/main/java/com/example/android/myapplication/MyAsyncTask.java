@@ -25,8 +25,11 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
     String sortingBy;
     @Override
     protected List doInBackground(String... params) {
+        //Saving first param send
         sortingBy = params[0];
-        Data = params[1]; // set the compare string to see if movie or video or reviews
+        // set the compare string to see if movie or video or reviews
+        Data = params[1];
+        //if no param send no point for execution
         if (params.length == 0) {
                 return null;
             }
@@ -38,7 +41,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
             if (params[0].equals("favorite")){return null;}
             final String MovieDB_BASE_URL = ("http://api.themoviedb.org/3/movie/" + params[0]);
             final String API_Key_PARAM = "api_key";
-            final String My_Key = "39dbc8225484ac7c6ceca6ff3701b74b";
+            final String My_Key = BuildConfig.MOVIE_DATA_BASE_API_KEY;
             Uri builtUri = Uri.parse(MovieDB_BASE_URL).buildUpon()
                     .appendQueryParameter(API_Key_PARAM,My_Key)
                     .build();
@@ -55,9 +58,6 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
             reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = reader.readLine()) != null) {
-                // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                // But it does make debugging a *lot* easier if you print out the completed
-                // buffer for debugging.
                 buffer.append(line + "\n");
             }
 
@@ -80,7 +80,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
                     Log.e("Error", " closing stream", e);
                 }
             }}
-
+        //Start parsing by first check what data is
         if (Data.equals("movies")){
             try {
                 return parser.movieJsonStrParsing(JsonString,sortingBy);
@@ -109,6 +109,7 @@ public class MyAsyncTask extends AsyncTask<String, Void, List<Movies>> {
     }
     @Override
     protected void onPreExecute() {
+        //for displaying spinner while data is fetching
         listener.onFetchProgress();
     }
     @Override

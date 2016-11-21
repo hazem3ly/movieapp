@@ -5,12 +5,12 @@ import io.realm.RealmObject;
 /**
  * Created by Hazem on 11/19/2016.
  */
-
+// as realm db does not support String list so i create this class to use when creating Trailers list
 public class TrailersData extends RealmObject {
     private String url;
     private String name;
 
-    public TrailersData(){
+    public TrailersData() {
 
     }
 
@@ -28,4 +28,5 @@ public class TrailersData extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
-    }}
+    }
+}
